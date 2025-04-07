@@ -4,26 +4,24 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    
     <title>Agroverso – Agricultura Inteligente</title>
 
-    <!-- SEO e Identidade -->
-    <meta name="description" content="Agroverso é uma plataforma de agricultura inteligente, sustentável e autônoma.">
+    <!-- SEO e identidade -->
+    <meta name="description" content="Plataforma de agricultura inteligente com cursos, soluções autônomas e tecnologia sustentável." />
+    <meta name="keywords" content="Agroverso, Agricultura, Sustentável, Hidroponia, Irrigação, Solar" />
     <meta name="author" content="Graciliano Tolentino" />
-    <meta name="keywords" content="Agroverso, Agricultura, Sustentabilidade, Hidroponia, Irrigação Inteligente, Energia Solar" />
-
+    
     <!-- Open Graph para redes sociais -->
     <meta property="og:title" content="Agroverso – Agricultura Inteligente" />
-    <meta property="og:description" content="Transformando o campo com tecnologia, cursos e soluções autônomas." />
-    <meta property="og:image" content="./images/banner.jpg" />
-    <meta property="og:url" content="https://agroverso.tec.br" />
+    <meta property="og:description" content="Transformando o campo com tecnologia e conhecimento gratuito." />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://agroverso.tec.br" />
+    <meta property="og:image" content="./images/banner.jpg" />
 
-    <!-- Favicon e estilo -->
+    <!-- Ícones e estilo -->
     <link rel="icon" type="image/png" href="./favicon.png" />
     <link rel="stylesheet" href="./styles.css" />
-
-    <!-- Manifesto para PWA (opcional) -->
     <link rel="manifest" href="./manifest.json" />
   </head>
 
@@ -32,10 +30,19 @@
       <strong>Este site requer JavaScript habilitado para funcionar corretamente.</strong>
     </noscript>
 
-    <!-- Elemento principal React -->
+    <!-- Ponto de montagem do React -->
     <div id="root"></div>
 
     <!-- Scripts -->
     <script src="./main.js" defer></script>
+
+    <!-- Registro do Service Worker para suporte PWA -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./service-worker.js')
+          .then(reg => console.log('✅ Service Worker registrado com sucesso:', reg))
+          .catch(err => console.warn('⚠️ Falha ao registrar o Service Worker:', err));
+      }
+    </script>
   </body>
 </html>
