@@ -1,56 +1,41 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
-
-    <!-- Responsividade -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- SEO -->
-    <meta name="description" content="Agroverso – Agricultura Inteligente, Sustentável e Autônoma. Irrigação, hidroponia e energia fotovoltaica com formação profissional gratuita." />
-    <meta name="author" content="Graciliano Tolentino" />
-    <meta name="keywords" content="Agroverso, agricultura inteligente, hidroponia, irrigação automatizada, energia solar, curso agro, certificado digital, agro tecnologia, sustentabilidade no campo" />
-    <meta name="robots" content="index, follow" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Agroverso – Agricultura Inteligente</title>
 
-    <!-- Open Graph (Facebook, LinkedIn, WhatsApp) -->
-    <meta property="og:title" content="Agroverso | Agricultura Inteligente, Sustentável e Autônoma" />
-    <meta property="og:description" content="Tecnologia no campo: cursos gratuitos, automação agrícola e soluções sustentáveis com certificação digital gratuita." />
-    <meta property="og:image" content="https://agroverso.tec.br/og-image.jpg" />
+    <!-- SEO e Identidade -->
+    <meta name="description" content="Agroverso é uma plataforma de agricultura inteligente, sustentável e autônoma.">
+    <meta name="author" content="Graciliano Tolentino" />
+    <meta name="keywords" content="Agroverso, Agricultura, Sustentabilidade, Hidroponia, Irrigação Inteligente, Energia Solar" />
+
+    <!-- Open Graph para redes sociais -->
+    <meta property="og:title" content="Agroverso – Agricultura Inteligente" />
+    <meta property="og:description" content="Transformando o campo com tecnologia, cursos e soluções autônomas." />
+    <meta property="og:image" content="./images/banner.jpg" />
     <meta property="og:url" content="https://agroverso.tec.br" />
     <meta property="og:type" content="website" />
 
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Agroverso | Agricultura Inteligente" />
-    <meta name="twitter:description" content="Soluções tecnológicas e capacitação gratuita para o campo. Transforme sua produção agrícola com o Agroverso." />
-    <meta name="twitter:image" content="https://agroverso.tec.br/og-image.jpg" />
+    <!-- Favicon e estilo -->
+    <link rel="icon" type="image/png" href="./favicon.png" />
+    <link rel="stylesheet" href="./styles.css" />
 
-    <!-- Título -->
-    <title>Agroverso | Agricultura Inteligente, Sustentável e Autônoma</title>
-
-    <!-- Favicon -->
-    <link rel="icon" href="/favicon.ico" />
-
-    <!-- Preconnects para fontes externas -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
-    <!-- Google Fonts (Inter) -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
-
-    <!-- Google Analytics 4 -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() { dataLayer.push(arguments); }
-      gtag('js', new Date());
-      gtag('config', 'G-XXXXXXXXXX'); // Substitua pelo seu ID do GA4
-    </script>
+    <!-- Manifesto para PWA (opcional) -->
+    <link rel="manifest" href="./manifest.json" />
   </head>
 
   <body>
-    <noscript>Você precisa habilitar o JavaScript para visualizar este site corretamente.</noscript>
+    <noscript>
+      <strong>Este site requer JavaScript habilitado para funcionar corretamente.</strong>
+    </noscript>
+
+    <!-- Elemento principal React -->
     <div id="root"></div>
+
+    <!-- Scripts -->
+    <script src="./main.js" defer></script>
   </body>
 </html>
