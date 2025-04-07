@@ -1,0 +1,15 @@
+# Agroverso – Agricultura Inteligente, Sustentável e Autônoma
+# Autor: Graciliano Tolentino
+# Este arquivo orienta os mecanismos de busca sobre como navegar e indexar este site.
+
+User-agent: *
+Allow: /
+
+# Sitemap para facilitar o rastreamento completo do site
+Sitemap: https://agroverso.tec.br/sitemap.xml
+
+# Diretivas de boas práticas (nenhuma área é restrita neste projeto)
+# Disallow: /admin/
+# Disallow: /api/
+
+# Este site apoia a transparência, acessibilidade e a construção de uma web aberta e sustentável.
