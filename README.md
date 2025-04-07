@@ -4,7 +4,7 @@ O Agroverso é uma plataforma full-stack dedicada à transformação digital do 
 
 ## 🚀 Objetivos do Projeto
 
-- Democratizar o acesso à tecnologia agrícola
+- **Democratizar o acesso à tecnologia agrícola**
 - Criar uma reserva de mercado com mão de obra qualificada
 - Oferecer cursos gratuitos com certificação automática
 - Gerar orçamentos personalizados para propriedades rurais e urbanas
