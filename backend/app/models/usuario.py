@@ -12,5 +12,8 @@ class User(db.Model):
         return {
             "id": self.id,
             "nome": self.nome,
-            "email": self.email,
+            "email": self.email
         }
+
+    def __repr__(self):
+        return f"<User {self.email}>"
