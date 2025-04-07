@@ -2,9 +2,12 @@ import jwt
 import datetime
 from flask import request, jsonify
 from functools import wraps
+import os
+from dotenv import load_dotenv
 
-# Idealmente carregado via variável de ambiente
-SECRET_KEY = "agroverso-secreto"
+# Carrega variáveis do ambiente
+load_dotenv()
+SECRET_KEY = os.getenv("SECRET_KEY", "chave-padrao-insegura")
 
 def gerar_token(usuario_id, exp_horas=4):
     """
@@ -17,7 +20,6 @@ def gerar_token(usuario_id, exp_horas=4):
     token = jwt.encode(payload, SECRET_KEY, algorithm="HS256")
     return token
 
-
 def verificar_token(f):
     """
     Decorator que verifica se o token JWT é válido.
@@ -27,7 +29,9 @@ def verificar_token(f):
         token = None
 
         if 'Authorization' in request.headers:
-            token = request.headers['Authorization'].split(" ")[1]
+            parts = request.headers['Authorization'].split(" ")
+            if len(parts) == 2 and parts[0] == "Bearer":
+                token = parts[1]
 
         if not token:
             return jsonify({"success": False, "message": "Token ausente"}), 401
@@ -41,5 +45,5 @@ def verificar_token(f):
             return jsonify({"success": False, "message": "Token inválido"}), 401
 
         return f(*args, **kwargs)
-    
+
     return wrapper
