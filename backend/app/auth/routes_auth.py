@@ -2,12 +2,15 @@ from flask import request, jsonify
 from werkzeug.security import generate_password_hash, check_password_hash
 import jwt
 import datetime
+import os
+from dotenv import load_dotenv
 
 from app.auth import auth_bp
 from app import db
 from app.models.users import User
 
-SECRET_KEY = "agroverso-secreto"  # Idealmente vem de variáveis de ambiente
+load_dotenv()
+SECRET_KEY = os.getenv("SECRET_KEY", "chave-padrao-insegura")
 
 @auth_bp.route('/register', methods=['POST'])
 def register():
