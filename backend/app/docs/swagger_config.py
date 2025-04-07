@@ -1,30 +1,29 @@
-from flasgger import Swagger
+import os
+from dotenv import load_dotenv
 
-def configurar_swagger(app):
-    """
-    Aplica a configuração do Swagger à instância do Flask.
-    """
-    Swagger(app, template={
+load_dotenv()
+
+def swagger_template():
+    return {
         "swagger": "2.0",
         "info": {
             "title": "API Agroverso",
-            "description": "Documentação da API oficial do Agroverso - Agricultura Inteligente e Sustentável.",
+            "description": "Documentação interativa da API Agroverso.",
             "version": "1.0.0",
             "contact": {
-                "name": "Graciliano Tolentino",
-                "email": "contato@agroverso.tec.br",
-                "url": "https://agroverso.tec.br"
-            },
+                "name": os.getenv("AUTHOR_NAME", "Graciliano Tolentino"),
+                "email": os.getenv("AUTHOR_EMAIL", "contato@agroverso.tec.br"),
+                "url": os.getenv("PROJECT_URL", "https://agroverso.tec.br")
+            }
         },
-        "host": "localhost:5000",  # Pode ser substituído por domínio em produção
-        "basePath": "/api",
-        "schemes": ["http"],
+        "schemes": ["https"],
+        "basePath": "/",
         "securityDefinitions": {
             "Bearer": {
                 "type": "apiKey",
                 "name": "Authorization",
                 "in": "header",
-                "description": "Prefixe com 'Bearer ' + token JWT"
+                "description": "Autenticação via token JWT. Use o formato: Bearer {seu_token}"
             }
         }
-    })
+    }
