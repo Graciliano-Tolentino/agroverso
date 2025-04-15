@@ -1,68 +1,64 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+/* 🎨 index.css – Estilo global regenerativo Agroverso com Tailwind */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
+/* 🌿 Corpo com clareza, contraste e legibilidade */
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  @apply bg-white text-grayIntelligent antialiased leading-relaxed tracking-wide font-opensans;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+/* 🌱 Cabeçalhos com tipografia marcante e presença */
+h1, h2, h3, h4 {
+  @apply font-montserrat text-greenRegenerative font-bold;
 }
 
+/* ✏️ Parágrafos equilibrados */
+p {
+  @apply text-sm text-grayIntelligent leading-relaxed;
+}
+
+/* 🔗 Links regenerativos com transição suave */
+a {
+  @apply text-greenRegenerative hover:text-blueWisdom transition-colors duration-200;
+}
+
+/* 🔒 Links institucionais de rodapé */
+.footer-link {
+  @apply text-grayIntelligent hover:text-greenRegenerative text-sm;
+}
+
+/* 📦 Seções com espaçamento natural */
+section {
+  @apply py-12 px-6 sm:px-10;
+}
+
+/* 🔘 Botões padronizados */
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  @apply font-semibold px-6 py-3 rounded-lg shadow-sm transition duration-200;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+/* ✅ Botão primário */
+.btn-primary {
+  @apply bg-greenRegenerative text-white hover:bg-green-600;
+}
+
+/* 🔵 Botão secundário */
+.btn-secondary {
+  @apply bg-blueWisdom text-white hover:bg-blue-700;
+}
+
+/* ⚠️ Aviso ou alerta */
+.alert {
+  @apply text-sm font-semibold px-4 py-3 rounded bg-yellowEnergy text-gray-800;
+}
+
+/* ✅ Sucesso */
+.success {
+  @apply text-greenRegenerative;
+}
+
+/* ❌ Erro */
+.error {
+  @apply text-redAlert;
 }

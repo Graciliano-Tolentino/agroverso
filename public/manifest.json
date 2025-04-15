@@ -1,23 +1,42 @@
 {
   "name": "Agroverso",
   "short_name": "Agroverso",
-  "description": "Ecossistema de Tecnologias Regenerativas para o Futuro Sustentável",
-  "start_url": "/",
+  "description": "Ecossistema de Tecnologias Regenerativas conectando inovação digital à sabedoria ancestral.",
+  "start_url": "/?source=pwa",
+  "scope": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#4CAF50",
   "orientation": "portrait",
   "lang": "pt-BR",
+  "theme_color": "#4CAF50",
+  "background_color": "#FFFFFF",
+  "categories": ["education", "technology", "sustainability", "agronegócio"],
+  "prefer_related_applications": false,
   "icons": [
     {
       "src": "/icons/icon-192.png",
+      "type": "image/png",
       "sizes": "192x192",
-      "type": "image/png"
+      "purpose": "any maskable"
     },
     {
       "src": "/icons/icon-512.png",
+      "type": "image/png",
       "sizes": "512x512",
-      "type": "image/png"
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshots/home.png",
+      "type": "image/png",
+      "sizes": "1080x1920",
+      "label": "Página Inicial"
+    },
+    {
+      "src": "/screenshots/certificados.png",
+      "type": "image/png",
+      "sizes": "1080x1920",
+      "label": "Emissão de Certificados"
     }
   ]
 }

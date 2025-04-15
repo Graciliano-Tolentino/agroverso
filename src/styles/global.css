@@ -1,0 +1,70 @@
+/* 🌎 globals.css – Estilo universal com suporte a dark mode */
+
+/* Cor de fundo e texto para temas claros e escuros */
+html {
+  @apply bg-white text-grayIntelligent transition-colors duration-300;
+}
+
+body {
+  @apply font-opensans leading-relaxed antialiased;
+}
+
+/* Ativação de dark mode baseado em classe */
+html.dark {
+  @apply bg-gray-900 text-gray-100;
+}
+
+/* Links temáticos */
+a {
+  @apply underline underline-offset-2 transition-colors;
+}
+
+html.dark a {
+  @apply text-greenRegenerative hover:text-yellowEnergy;
+}
+
+/* Títulos em destaque com adaptação de contraste */
+h1, h2, h3, h4 {
+  @apply font-montserrat font-bold text-greenRegenerative;
+}
+
+html.dark h1,
+html.dark h2,
+html.dark h3,
+html.dark h4 {
+  @apply text-yellowEnergy;
+}
+
+/* Botões padrão */
+button {
+  @apply px-6 py-3 rounded-lg font-semibold transition;
+}
+
+.btn-primary {
+  @apply bg-greenRegenerative text-white hover:bg-green-600;
+}
+
+.btn-secondary {
+  @apply bg-blueWisdom text-white hover:bg-blue-700;
+}
+
+html.dark .btn-primary {
+  @apply bg-yellowEnergy text-gray-900 hover:bg-yellow-400;
+}
+
+/* Alertas visuais */
+.alert {
+  @apply px-4 py-3 rounded-md font-semibold text-sm;
+}
+
+.alert-success {
+  @apply bg-greenRegenerative text-white;
+}
+
+.alert-error {
+  @apply bg-redAlert text-white;
+}
+
+.alert-warning {
+  @apply bg-yellowEnergy text-gray-800;
+}
