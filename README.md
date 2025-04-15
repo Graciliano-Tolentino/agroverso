@@ -1,69 +1,56 @@
-Perfeito, Graciliano. Abaixo está o **`README.md`** gerado com **clareza técnica, força institucional e beleza regenerativa**, pronto para ser usado no repositório do **Agroverso**.
+Perfeito, Graciliano. Abaixo está o **`README.md` oficial** do projeto **Agroverso**, criado com:
 
-Este `README.md` serve tanto como **documentação oficial do projeto** quanto como **guia de boas práticas para desenvolvedores que queiram contribuir** com o ecossistema Agroverso.
+- ✅ Clareza técnica para desenvolvedores
+- ✅ Força institucional regenerativa
+- ✅ Beleza comunicacional que representa sua visão
+- ✅ Estrutura pronta para colaboração, documentação e publicação
 
 ---
 
-## ✅ `README.md` — Padrão Regenerativo Agroverso
+## ✅ `README.md` — Agroverso
+
+> 📁 Caminho: `README.md`
 
 ```markdown
 # 🌱 Agroverso
 
 **Tecnologias Regenerativas para o Futuro Sustentável**
 
-Revolucionando o Agro com soluções tecnológicas conectadas à sabedoria ancestral.  
-Desenvolvido com **React + Vite + Tailwind CSS** no mais alto padrão ético, estético e funcional.
+O Agroverso é uma plataforma que une sabedoria ancestral, inovação tecnológica e impacto ambiental positivo.  
+Criado com foco em acessibilidade, regeneração e ética, o projeto entrega soluções digitais voltadas ao campo e à cidade com base em React, Vite e Tailwind CSS.
 
 ---
 
 ## 📦 Estrutura do Projeto
 
 ```bash
-frontend/
-├── public/                   # HTML base e ícones
+/
+├── public/                    # HTML base, ícones, robots.txt, manifest
+│   └── data/                  # Bases JSON (admin.json, certificados.json)
 ├── src/
-│   ├── components/           # Componentes reutilizáveis (Navbar, Hero, Footer, etc.)
-│   ├── pages/                # Páginas principais (Home.jsx)
-│   ├── styles/               # Estilos globais (index.css com Tailwind)
-│   ├── App.jsx               # Estrutura principal da aplicação
-│   └── main.jsx              # Entrada do React via Vite
-├── .env                      # Variáveis de ambiente
-├── vite.config.js           # Configuração com aliases e ambiente
-├── tailwind.config.js       # Estilo visual institucional
-├── postcss.config.js        # Integração Tailwind + Vite
-├── package.json             # Dependências e scripts
+│   ├── assets/                # Imagens e ícones
+│   ├── components/            # Navbar, Hero, Footer, BlogSection, etc.
+│   ├── pages/                 # Home, Sobre, Contato, Admin, Logout, 404
+│   ├── styles/                # index.css com Tailwind
+│   ├── App.jsx                # Estrutura principal com React Router
+│   └── main.jsx               # Entrada React
+├── package.json
+├── vite.config.js
+├── tailwind.config.js
+├── postcss.config.js
+├── README.md
+└── .env
 ```
 
 ---
 
 ## 🚀 Comandos de Desenvolvimento
 
-### 🔧 Instalar dependências
-
 ```bash
-npm install
-```
-
-### ▶️ Rodar o projeto localmente
-
-```bash
-npm run dev
-```
-
-Acesse: [http://localhost:5173](http://localhost:5173)
-
-### 🔨 Gerar build para produção
-
-```bash
-npm run build
-```
-
-Saída gerada na pasta `dist/`
-
-### 🧪 Testar build localmente
-
-```bash
-npm run preview
+npm install        # Instala todas as dependências
+npm run dev        # Inicia o servidor local (localhost:5173)
+npm run build      # Gera a build para produção (dist/)
+npm run preview    # Visualiza a build localmente
 ```
 
 ---
@@ -73,51 +60,52 @@ npm run preview
 - [React](https://reactjs.org/)
 - [Vite](https://vitejs.dev/)
 - [Tailwind CSS](https://tailwindcss.com/)
-- [Google Fonts: Montserrat, Roboto, Open Sans](https://fonts.google.com/)
-- Open Graph + SEO básico
-- Padrão institucional: **acessibilidade, performance, ética, regeneração e beleza**
+- [html2pdf.js](https://ekoopmans.github.io/html2pdf/)
+- [React Router DOM](https://reactrouter.com/)
+- Google Fonts: Montserrat, Roboto, Open Sans
+- SEO: `robots.txt`, `sitemap.xml`, `manifest.json`
 
 ---
 
-## 🌐 Deploy (Opções Recomendadas)
+## 🌐 Deploy
 
-| Plataforma | Status     | Observações                         |
-|------------|------------|-------------------------------------|
-| **Vercel** | ✅ Recomendado | Detecção automática de Vite         |
-| **Netlify**| ✅ Simples     | Build command: `npm run build`     |
-| **GitHub Pages** | ✅ (via plugin) | Use `base: '/nome-do-repo/'` no `vite.config.js` |
+> O projeto é hospedado no Vercel com domínio próprio:
+
+- 🔗 [https://agroverso.tec.br](https://agroverso.tec.br)
+- Deploy automático a cada `git push`
 
 ---
 
-## 🔐 Variáveis de Ambiente (`.env`)
-
-Exemplo de uso:
+## 🔐 Variáveis de Ambiente (.env)
 
 ```env
 VITE_API_BASE_URL=https://api.agroverso.tec.br
 APP_ENV="producao"
 ```
 
-Usando no código:
+---
 
-```js
-const url = import.meta.env.VITE_API_BASE_URL
-```
+## 🔏 Painel Administrativo
+
+- Acesso via `/admin`
+- Protegido por autenticação via `admin.json`
+- Geração e exportação de certificados em PDF
+- Validação de certificados por código único (`certificados.json`)
 
 ---
 
-## 🤝 Contribuição
+## 📜 Contribuindo
 
 Siga os princípios do Agroverso:
-- Código limpo, modular e acessível
-- Visual regenerativo: harmonia, leveza, contraste, clareza
-- Comentários apenas quando necessário
-- Estrutura de arquivos clara e respeitando os aliases
 
-### Aliases úteis:
+- 🌿 Código limpo e modular
+- ✨ Visual regenerativo: leve, contrastado e acessível
+- 🧠 Comentários apenas quando necessário
+- 📁 Organização com aliases como:
 
 ```js
 import Hero from '@components/Hero'
+import Home from '@pages/Home'
 import img from '@assets/images/logo.png'
 ```
 
@@ -125,29 +113,23 @@ import img from '@assets/images/logo.png'
 
 ## 📄 Licença
 
-Este projeto está sob a **Licença MIT**, adaptada aos princípios regenerativos, éticos e sustentáveis do Agroverso.
+Projeto distribuído sob Licença MIT.  
+Inspirado nos princípios de ética, regeneração, ancestralidade e tecnologia aberta.
 
 ---
 
 ## ✨ Filosofia
 
-> **“Design não é apenas o que se vê. É como funciona. É como transforma.”**  
-> – Adaptado ao espírito regenerativo do Agroverso
+> “Não há revolução no agro sem regeneração no espírito.”  
+> — Agroverso
 
 ---
 
-### 🌐 Site oficial: [https://agroverso.tec.br](https://agroverso.tec.br)
+## 🧭 Links úteis
 
----
-```
+- 🔗 Site oficial: [https://agroverso.tec.br](https://agroverso.tec.br)
+- 🛠️ Painel admin: `/admin`
+- 📩 Contato: `/contato`
+- 📖 Sobre: `/sobre`
+- 🧾 Validador: `/validador`
 
----
-
-## ✅ Próximo passo?
-
-Deseja que eu:
-- Gere o `.env` completo com variáveis organizadas?
-- Continue com o componente `MarketplaceSection.jsx`?
-- Prepare uma estrutura de deploy para GitHub Pages ou Vercel?
-
-Comando é seu — sigo com você até o topo.
