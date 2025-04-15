@@ -1,78 +1,64 @@
-// ✅ Validador de Certificados Digitais – Agroverso
-import { useState } from 'react'
+// 🔍 ValidadorCertificado.jsx – Validação dinâmica com JSON externo
+import React, { useState, useEffect } from 'react'
 
 export default function ValidadorCertificado() {
   const [codigo, setCodigo] = useState('')
   const [resultado, setResultado] = useState(null)
-  const [erro, setErro] = useState(null)
+  const [base, setBase] = useState([])
 
-  const certificadosSimulados = {
-    'ABC123XYZ': {
-      nome: 'Joana da Silva',
-      curso: 'Hidroponia Inteligente para Hortas Urbanas',
-      data: '15 de Abril de 2025',
-    },
-    'DEF456LMN': {
-      nome: 'Carlos Oliveira',
-      curso: 'Gestão Regenerativa no Agro',
-      data: '02 de Março de 2025',
-    },
-  }
+  useEffect(() => {
+    fetch('/data/certificados.json')
+      .then(res => res.json())
+      .then(data => setBase(data))
+      .catch(err => console.error('Erro ao carregar certificados:', err))
+  }, [])
 
-  const validarCertificado = () => {
-    setErro(null)
-    setResultado(null)
-
-    if (!codigo.trim()) {
-      setErro('Por favor, insira um código de certificado.')
-      return
-    }
-
-    const info = certificadosSimulados[codigo.trim().toUpperCase()]
-
-    if (info) {
-      setResultado(info)
-    } else {
-      setErro('Certificado não encontrado. Verifique o código e tente novamente.')
-    }
+  const validar = (e) => {
+    e.preventDefault()
+    const cert = base.find(item => item.codigo.toLowerCase() === codigo.toLowerCase())
+    setResultado(cert || false)
   }
 
   return (
-    <section className="max-w-xl mx-auto px-6 py-20 text-center font-opensans">
-      <h2 className="text-3xl font-montserrat font-bold text-grayIntelligent mb-6">
-        Validação de Certificado
+    <section className="max-w-xl mx-auto px-6 py-20 font-opensans">
+      <h2 className="text-3xl font-montserrat font-bold text-grayIntelligent mb-6 text-center">
+        Validador de Certificados
       </h2>
 
-      <p className="mb-8 text-gray-600 text-sm">
-        Insira abaixo o código de verificação encontrado no certificado ou escaneado pelo QR Code.
+      <p className="text-sm text-gray-600 mb-8 text-center">
+        Insira o código do certificado para verificar sua autenticidade.
       </p>
 
-      <input
-        type="text"
-        value={codigo}
-        onChange={(e) => setCodigo(e.target.value)}
-        placeholder="Digite o código do certificado (ex: ABC123XYZ)"
-        className="w-full border border-gray-300 rounded-lg px-4 py-3 mb-4 shadow-sm focus:outline-none focus:ring-2 focus:ring-greenRegenerative text-sm"
-      />
+      <form onSubmit={validar} className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+        <input
+          type="text"
+          value={codigo}
+          onChange={(e) => setCodigo(e.target.value)}
+          placeholder="Ex: AGRO-001"
+          className="w-full sm:w-auto px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-greenRegenerative text-sm"
+        />
+        <button
+          type="submit"
+          className="bg-greenRegenerative text-white font-semibold px-6 py-3 rounded-lg shadow hover:bg-green-600 transition"
+        >
+          Validar
+        </button>
+      </form>
 
-      <button
-        onClick={validarCertificado}
-        className="bg-greenRegenerative text-white px-6 py-3 rounded-lg font-semibold shadow hover:bg-green-600 transition duration-200"
-      >
-        Validar Certificado
-      </button>
-
-      {erro && <p className="mt-6 text-sm text-red-600">{erro}</p>}
-
-      {resultado && (
-        <div className="mt-10 border border-gray-200 rounded-lg p-6 bg-white shadow text-left text-sm">
-          <h3 className="font-bold text-greenRegenerative text-lg mb-2">
-            Certificado válido 🎉
-          </h3>
-          <p><strong>Nome:</strong> {resultado.nome}</p>
-          <p><strong>Curso:</strong> {resultado.curso}</p>
-          <p><strong>Data de Emissão:</strong> {resultado.data}</p>
+      {/* Resultado */}
+      {resultado && resultado !== false && (
+        <div className="bg-white border border-gray-200 rounded-xl shadow p-6 text-sm text-center">
+          <p className="mb-2"><strong>Código:</strong> {resultado.codigo}</p>
+          <p className="mb-2"><strong>Nome:</strong> {resultado.nome}</p>
+          <p className="mb-2"><strong>Curso:</strong> {resultado.curso}</p>
+          <p><strong>Data de emissão:</strong> {resultado.data}</p>
         </div>
+      )}
+
+      {resultado === false && (
+        <p className="text-red-600 text-center text-sm mt-4">
+          Certificado não encontrado. Verifique o código inserido.
+        </p>
       )}
     </section>
   )

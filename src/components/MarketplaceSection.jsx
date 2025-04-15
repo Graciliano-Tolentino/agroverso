@@ -1,17 +1,17 @@
-// 🌱 MarketplaceSection – Produtos Populares com Impacto ESG
-import { useEffect, useState } from 'react'
+// 🛒 MarketplaceSection.jsx – Produtos Populares com Selo ESG
+import React, { useEffect, useState } from 'react'
 import ProductCard from '@components/ProductCard'
 
 export default function MarketplaceSection() {
   const [products, setProducts] = useState([])
 
-  // ⚙️ Simulação de carregamento de produtos (pode ser trocado por fetch API)
+  // Simulação de produtos (pode ser substituído por fetch futuramente)
   useEffect(() => {
     setProducts([
       {
         id: 1,
         name: 'Café Orgânico Sul Mineiro',
-        price: 42.90,
+        price: 42.9,
         image: '/src/assets/images/produto_cafe.jpg',
         status: 'disponível',
         esg: true,
@@ -19,7 +19,7 @@ export default function MarketplaceSection() {
       {
         id: 2,
         name: 'Hidroponia Inteligente p/ Hortas',
-        price: 189.00,
+        price: 189.0,
         image: '/src/assets/images/produto_hidroponia.jpg',
         status: 'últimas unidades',
         esg: true,
@@ -27,11 +27,11 @@ export default function MarketplaceSection() {
       {
         id: 3,
         name: 'Composto de Laranja Sustentável',
-        price: 12.50,
+        price: 12.5,
         image: '/src/assets/images/produto_laranja.jpg',
         status: 'esgotado',
         esg: true,
-      },
+      }
     ])
   }, [])
 
@@ -45,7 +45,7 @@ export default function MarketplaceSection() {
       </h2>
 
       <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
-        {products.map((product) => (
+        {products.map(product => (
           <ProductCard key={product.id} data={product} />
         ))}
       </div>

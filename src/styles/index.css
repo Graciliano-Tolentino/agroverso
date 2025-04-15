@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 🌿 Estilos adicionais (opcional) */
+body {
+  @apply bg-white text-grayIntelligent antialiased;
+}

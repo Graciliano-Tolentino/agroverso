@@ -1,4 +1,4 @@
-// 🌿 Página Sobre – Identidade Regenerativa Agroverso
+// 🌍 Sobre.jsx – Quem Somos no Agroverso
 import React from 'react'
 
 export default function Sobre() {
@@ -9,7 +9,7 @@ export default function Sobre() {
       </h2>
 
       <p className="text-center text-sm text-gray-600 mb-12 max-w-2xl mx-auto">
-        O Agroverso é uma plataforma de tecnologias regenerativas que une sabedoria ancestral e inovação ética para transformar o futuro da agricultura no Brasil e no mundo.
+        O Agroverso é um ecossistema de tecnologias regenerativas que conecta saberes ancestrais, soluções sustentáveis e inovação acessível para transformar o futuro da agricultura brasileira.
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -17,15 +17,15 @@ export default function Sobre() {
         <div>
           <h3 className="text-xl font-bold font-montserrat text-greenRegenerative mb-3">🌱 Missão</h3>
           <p className="text-sm leading-relaxed">
-            Regenerar o campo e a cidade por meio de tecnologias acessíveis, conectando produtores, educadores e comunidades a soluções que respeitam a vida, os ciclos naturais e a justiça social.
+            Regenerar o campo e a cidade por meio de tecnologias acessíveis e inclusivas, conectando pessoas, saberes e territórios com respeito à vida, à natureza e à justiça social.
           </p>
         </div>
 
         {/* Visão */}
         <div>
-          <h3 className="text-xl font-bold font-montserrat text-greenRegenerative mb-3">🌎 Visão</h3>
+          <h3 className="text-xl font-bold font-montserrat text-greenRegenerative mb-3">🌍 Visão</h3>
           <p className="text-sm leading-relaxed">
-            Ser referência em inovação agroecológica regenerativa, promovendo transformação ambiental, cultural e econômica a partir do conhecimento compartilhado.
+            Ser referência global em inovação agroecológica regenerativa, valorizando as raízes, impulsionando a soberania alimentar e fortalecendo comunidades.
           </p>
         </div>
 
@@ -33,11 +33,11 @@ export default function Sobre() {
         <div>
           <h3 className="text-xl font-bold font-montserrat text-greenRegenerative mb-3">✨ Valores</h3>
           <ul className="list-disc ml-5 text-sm leading-relaxed">
-            <li>Ética e transparência em cada ação</li>
+            <li>Ética, verdade e transparência</li>
             <li>Respeito à sabedoria dos povos originários</li>
-            <li>Sustentabilidade real, além do discurso</li>
-            <li>Educação como caminho de transformação</li>
-            <li>Inclusão social e justiça ecológica</li>
+            <li>Compromisso com sustentabilidade real</li>
+            <li>Educação como transformação profunda</li>
+            <li>Inclusão, justiça ecológica e responsabilidade social</li>
           </ul>
         </div>
 
@@ -45,12 +45,12 @@ export default function Sobre() {
         <div>
           <h3 className="text-xl font-bold font-montserrat text-greenRegenerative mb-3">👥 Nossa Equipe</h3>
           <p className="text-sm leading-relaxed">
-            O Agroverso é uma construção coletiva formada por educadores, desenvolvedores, agricultores, designers e pensadores regenerativos comprometidos com a ética, a técnica e a beleza.
+            O Agroverso é desenvolvido por educadores, agricultores, tecnólogos, designers e ativistas que acreditam em um futuro regenerativo, baseado em cooperação, ciência e ancestralidade.
           </p>
         </div>
       </div>
 
-      {/* CTA institucional opcional */}
+      {/* CTA institucional */}
       <div className="mt-12 text-center">
         <a
           href="/contato"

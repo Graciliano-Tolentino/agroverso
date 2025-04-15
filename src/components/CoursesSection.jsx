@@ -1,10 +1,9 @@
-// 🎓 CoursesSection – Capacitação Técnica Regenerativa Agroverso
-import { useEffect, useState } from 'react'
+// 🎓 CoursesSection.jsx – Cursos Regenerativos Agroverso
+import React, { useEffect, useState } from 'react'
 
 export default function CoursesSection() {
   const [courses, setCourses] = useState([])
 
-  // Simulação de dados de cursos (pode ser substituído por fetch futuramente)
   useEffect(() => {
     setCourses([
       {
@@ -27,7 +26,7 @@ export default function CoursesSection() {
         description: 'Integre tecnologia e tradição com ética ambiental.',
         thumbnail: 'https://img.youtube.com/vi/0G3Rcs_7dx4/hqdefault.jpg',
         videoUrl: 'https://www.youtube.com/watch?v=0G3Rcs_7dx4',
-      },
+      }
     ])
   }, [])
 
@@ -50,11 +49,11 @@ export default function CoursesSection() {
             className="group block bg-white rounded-lg shadow hover:shadow-md transition duration-200 overflow-hidden"
             aria-label={`Acessar curso: ${course.title}`}
           >
-            {/* Thumbnail com botão play central */}
+            {/* Miniatura com botão de play */}
             <div className="relative">
               <img
                 src={course.thumbnail}
-                alt={course.title}
+                alt={`Thumbnail do curso: ${course.title}`}
                 className="w-full h-52 object-cover"
                 loading="lazy"
               />

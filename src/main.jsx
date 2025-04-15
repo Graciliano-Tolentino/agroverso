@@ -1,10 +1,18 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
+// 🌱 main.jsx – Ponto de entrada principal do Agroverso
+import React from 'react'
+import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
+import './styles/index.css'
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
+
+// 🌀 Estilos globais com Tailwind CSS e customizações regenerativas
+import './styles/index.css'
+
+// 🔒 Renderização com clareza, força e segurança
+const rootElement = document.getElementById('root')
+
+ReactDOM.createRoot(rootElement).render(
+  <React.StrictMode>
     <App />
-  </StrictMode>,
+  </React.StrictMode>
 )

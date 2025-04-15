@@ -1,5 +1,5 @@
-// 📬 Página de Contato – Comunicação Ética e Responsável
-import { useState } from 'react'
+// 📬 Contato.jsx – Comunicação Institucional Agroverso
+import React, { useState } from 'react'
 
 export default function Contato() {
   const [form, setForm] = useState({ nome: '', email: '', mensagem: '' })
@@ -13,12 +13,12 @@ export default function Contato() {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    // Simulação de envio (substituir por fetch futuramente)
     if (!form.nome || !form.email || !form.mensagem) {
       setErro('Por favor, preencha todos os campos.')
       return
     }
 
+    // ✅ Simulação de envio (substituir por fetch com backend ou Formspree)
     setSucesso('Mensagem enviada com sucesso! Em breve entraremos em contato.')
     setErro(null)
     setForm({ nome: '', email: '', mensagem: '' })
@@ -30,8 +30,8 @@ export default function Contato() {
         Fale Conosco
       </h2>
 
-      <p className="text-gray-600 text-sm mb-8 text-center">
-        Entre em contato conosco para dúvidas, sugestões ou parcerias. Estamos à disposição.
+      <p className="text-center text-gray-600 text-sm mb-10">
+        Entre em contato para dúvidas, sugestões ou parcerias. Teremos alegria em te responder.
       </p>
 
       <form onSubmit={handleSubmit} className="space-y-6">
@@ -42,8 +42,8 @@ export default function Contato() {
             name="nome"
             value={form.nome}
             onChange={handleChange}
-            className="w-full border border-gray-300 rounded-lg px-4 py-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-greenRegenerative text-sm"
             placeholder="Seu nome"
+            className="w-full border border-gray-300 rounded-lg px-4 py-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-greenRegenerative text-sm"
           />
         </div>
 
@@ -54,8 +54,8 @@ export default function Contato() {
             name="email"
             value={form.email}
             onChange={handleChange}
-            className="w-full border border-gray-300 rounded-lg px-4 py-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-greenRegenerative text-sm"
             placeholder="email@exemplo.com"
+            className="w-full border border-gray-300 rounded-lg px-4 py-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-greenRegenerative text-sm"
           />
         </div>
 
@@ -65,9 +65,9 @@ export default function Contato() {
             name="mensagem"
             value={form.mensagem}
             onChange={handleChange}
-            className="w-full border border-gray-300 rounded-lg px-4 py-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-greenRegenerative text-sm"
-            rows="5"
             placeholder="Escreva sua mensagem..."
+            rows="5"
+            className="w-full border border-gray-300 rounded-lg px-4 py-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-greenRegenerative text-sm"
           />
         </div>
 

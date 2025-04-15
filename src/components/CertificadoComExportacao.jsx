@@ -1,8 +1,8 @@
-// 🎖️ Certificado com Exportação PDF – Padrão Agroverso
+// 🧾 CertificadoComExportacao.jsx – Geração de PDF com html2pdf.js
+import React from 'react'
 import html2pdf from 'html2pdf.js'
 
 export default function CertificadoComExportacao({ nome, curso, data, qrCodeUrl }) {
-  // Função para gerar PDF
   const handleDownload = () => {
     const element = document.getElementById('certificado-pdf')
 
@@ -11,7 +11,7 @@ export default function CertificadoComExportacao({ nome, curso, data, qrCodeUrl 
       filename: `certificado-${nome.replace(/\s+/g, '_')}.pdf`,
       image: { type: 'jpeg', quality: 0.98 },
       html2canvas: { scale: 2 },
-      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
     }
 
     html2pdf().set(options).from(element).save()
@@ -19,7 +19,12 @@ export default function CertificadoComExportacao({ nome, curso, data, qrCodeUrl 
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-10">
-      <div id="certificado-pdf" className="bg-white border border-gray-200 shadow-xl rounded-xl px-8 py-10 text-center relative font-opensans text-grayIntelligent">
+      {/* Certificado visual */}
+      <div
+        id="certificado-pdf"
+        className="bg-white border border-gray-200 shadow-xl rounded-xl px-8 py-10 text-center font-opensans text-grayIntelligent"
+      >
+        {/* Logo */}
         <img
           src="/src/assets/images/logo_agroverso.png"
           alt="Logo Agroverso"
@@ -34,20 +39,20 @@ export default function CertificadoComExportacao({ nome, curso, data, qrCodeUrl 
           Declaramos que <span className="font-bold">{nome}</span> concluiu com êxito o curso:
         </p>
 
-        <h3 className="text-lg font-roboto font-semibold mb-6">
-          “{curso}”
-        </h3>
+        <h3 className="text-lg font-roboto font-semibold mb-6">“{curso}”</h3>
 
         <p className="text-sm mb-6">
           Emitido em: <span className="font-semibold">{data}</span>
         </p>
 
         {/* QR Code */}
-        <div className="flex justify-center">
-          <div className="w-24 h-24 rounded-md overflow-hidden border border-gray-300 shadow">
-            <img src={qrCodeUrl} alt="QR Code de validação" className="w-full h-full object-cover" />
+        {qrCodeUrl && (
+          <div className="flex justify-center mt-4">
+            <div className="w-24 h-24 rounded-md overflow-hidden border border-gray-300 shadow">
+              <img src={qrCodeUrl} alt="QR Code de validação" className="w-full h-full object-cover" />
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Assinaturas */}
         <div className="mt-10 flex justify-center gap-10 text-xs text-gray-500">
@@ -64,7 +69,7 @@ export default function CertificadoComExportacao({ nome, curso, data, qrCodeUrl 
         </div>
       </div>
 
-      {/* Botão de exportação */}
+      {/* Botão de download */}
       <div className="text-center mt-6">
         <button
           onClick={handleDownload}

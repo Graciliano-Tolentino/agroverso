@@ -1,10 +1,9 @@
-// 📝 BlogSection – Reflexão Crítica e Educação Regenerativa
-import { useEffect, useState } from 'react'
+// 📝 BlogSection.jsx – Publicações Educativas Agroverso
+import React, { useEffect, useState } from 'react'
 
 export default function BlogSection() {
   const [posts, setPosts] = useState([])
 
-  // Simulação de artigos (substituir futuramente por API externa)
   useEffect(() => {
     setPosts([
       {
@@ -30,7 +29,7 @@ export default function BlogSection() {
         date: '10 abr. 2025',
         thumbnail: '/src/assets/images/blog_nascentes.jpg',
         link: '#',
-      },
+      }
     ])
   }, [])
 

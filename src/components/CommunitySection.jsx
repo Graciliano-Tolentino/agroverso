@@ -1,10 +1,9 @@
-// 🤝 CommunitySection – Engajamento com Transparência Regenerativa
-import { useEffect, useState } from 'react'
+// 🤝 CommunitySection.jsx – Depoimentos da Comunidade Agroverso
+import React, { useEffect, useState } from 'react'
 
 export default function CommunitySection() {
   const [testimonials, setTestimonials] = useState([])
 
-  // Dados simulados de testemunhos reais
   useEffect(() => {
     setTestimonials([
       {
@@ -24,7 +23,7 @@ export default function CommunitySection() {
         name: 'Rafaela Torres',
         text: 'Os cursos abriram minha mente para uma gestão regenerativa e consciente.',
         avatar: '/src/assets/images/avatar_rafaela.png',
-      },
+      }
     ])
   }, [])
 
@@ -37,7 +36,7 @@ export default function CommunitySection() {
         Vozes da Comunidade
       </h2>
 
-      {/* Slider horizontal responsivo */}
+      {/* Slider horizontal nativo com scroll suave */}
       <div className="flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-4">
         {testimonials.map((item) => (
           <div
@@ -59,7 +58,7 @@ export default function CommunitySection() {
       {/* Call to Action */}
       <div className="mt-12 text-center">
         <a
-          href="#"
+          href="#contato"
           className="inline-block bg-blueWisdom text-white font-semibold font-montserrat px-8 py-3 rounded-xl shadow-md hover:bg-blue-700 transition-all duration-200"
           aria-label="Junte-se à comunidade Agroverso"
         >

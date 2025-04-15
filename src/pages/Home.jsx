@@ -1,4 +1,6 @@
-// 🌱 Página Home – Estrutura Modular Regenerativa Agroverso
+// 🏡 Home.jsx – Interface Principal do Agroverso
+import React from 'react'
+
 import Navbar from '@components/Navbar'
 import Hero from '@components/Hero'
 import MarketplaceSection from '@components/MarketplaceSection'
@@ -10,14 +12,14 @@ import Footer from '@components/Footer'
 export default function Home() {
   return (
     <>
-      {/* Cabeçalho com navegação clara e institucional */}
+      {/* 🔝 Navegação institucional */}
       <Navbar />
 
-      {/* Hero com identidade regenerativa e emocional */}
+      {/* 🌱 Hero visual com missão */}
       <Hero />
 
-      {/* Conteúdo principal com seções regenerativas */}
-      <main role="main" className="bg-white overflow-x-hidden">
+      {/* 🧩 Seções regenerativas */}
+      <main role="main" className="bg-white overflow-x-hidden scroll-smooth">
         <section id="marketplace" aria-labelledby="marketplace-title">
           <MarketplaceSection />
         </section>
@@ -35,7 +37,7 @@ export default function Home() {
         </section>
       </main>
 
-      {/* Rodapé ético, filosófico e acessível */}
+      {/* 🧭 Rodapé ético e informativo */}
       <Footer />
     </>
   )
