@@ -2,12 +2,11 @@ import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'path'
 
-// ⚙️ Configuração Vite no padrão Agroverso
+// ⚙️ Configuração Vite para produção via Vercel
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
 
   return {
-    base: '/agroverso/', // necessário para GitHub Pages
     plugins: [react()],
     resolve: {
       alias: {
