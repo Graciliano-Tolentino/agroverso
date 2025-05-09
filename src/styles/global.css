@@ -1,70 +1,91 @@
-/* 🌎 globals.css – Estilo universal com suporte a dark mode */
+/*
+  ============================================
+  📄 Projeto: Agroverso
+  📁 Arquivo: src/styles/global.css
+  ✍️ Autor: Equipe Agroverso
+  📅 Criado em: 07/05/2025
+  🔄 Última atualização: 07/05/2025
+  📝 Descrição:
+     Estilo global unificado do Agroverso.
+     Contém diretivas do Tailwind, foco acessível,
+     dark mode, identidade visual e componentes utilitários.
+     Desenvolvido com sabedoria, força e beleza.
+  ============================================
+*/
 
-/* Cor de fundo e texto para temas claros e escuros */
+/* Tailwind base */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 🌍 Base universal */
 html {
+  scroll-behavior: smooth;
   @apply bg-white text-grayIntelligent transition-colors duration-300;
+}
+
+html.dark {
+  @apply bg-gray-900 text-gray-100;
 }
 
 body {
   @apply font-opensans leading-relaxed antialiased;
 }
 
-/* Ativação de dark mode baseado em classe */
-html.dark {
-  @apply bg-gray-900 text-gray-100;
-}
-
-/* Links temáticos */
+/* 🔗 Links */
 a {
   @apply underline underline-offset-2 transition-colors;
 }
-
 html.dark a {
   @apply text-greenRegenerative hover:text-yellowEnergy;
 }
 
-/* Títulos em destaque com adaptação de contraste */
+/* 🎯 Foco visível */
+:focus-visible {
+  outline: 2px solid theme('colors.greenRegenerative');
+  outline-offset: 2px;
+}
+
+/* 🧭 Títulos */
 h1, h2, h3, h4 {
   @apply font-montserrat font-bold text-greenRegenerative;
 }
-
-html.dark h1,
-html.dark h2,
-html.dark h3,
-html.dark h4 {
+html.dark h1, html.dark h2, html.dark h3, html.dark h4 {
   @apply text-yellowEnergy;
 }
 
-/* Botões padrão */
+/* 🟢 Botões */
 button {
   @apply px-6 py-3 rounded-lg font-semibold transition;
 }
-
 .btn-primary {
   @apply bg-greenRegenerative text-white hover:bg-green-600;
 }
-
 .btn-secondary {
   @apply bg-blueWisdom text-white hover:bg-blue-700;
 }
-
 html.dark .btn-primary {
   @apply bg-yellowEnergy text-gray-900 hover:bg-yellow-400;
 }
 
-/* Alertas visuais */
+/* ⚠️ Alertas */
 .alert {
   @apply px-4 py-3 rounded-md font-semibold text-sm;
 }
-
 .alert-success {
   @apply bg-greenRegenerative text-white;
 }
-
 .alert-error {
   @apply bg-redAlert text-white;
 }
-
 .alert-warning {
   @apply bg-yellowEnergy text-gray-800;
 }
+
+/*
+  ============================================
+  🔚 Fim do arquivo src/styles/global.css
+  🔒 Protegido por sabedoria, força e beleza
+  🌱 Agroverso – Todos os direitos reservados
+  ============================================
+*/

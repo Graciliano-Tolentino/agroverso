@@ -1,41 +1,89 @@
+<!--
+  ============================================
+  📄 Projeto: Agroverso
+  📁 Arquivo: public/index.html
+  ✍️ Autor: Equipe Agroverso
+  📅 Criado em: 07/05/2025
+  🔄 Última atualização: 08/05/2025
+  📝 Descrição:
+     Arquivo HTML raiz da aplicação Agroverso.
+     Contém metadados para SEO, PWA, acessibilidade
+     e redes sociais (Open Graph e Twitter Card).
+     Finalizado com sabedoria, força e beleza.
+  ============================================
+-->
+
 <!DOCTYPE html>
 <html lang="pt-BR">
   <head>
+    <!-- 🌐 Metadados essenciais -->
     <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Agroverso – Tecnologias Regenerativas para o Futuro Sustentável" />
-    <meta name="keywords" content="agricultura sustentável, agro tecnologia, ESG, regeneração, agroverso" />
-    <meta name="author" content="Agroverso" />
-
+    <!-- 🔍 SEO -->
     <title>Agroverso | Revolucionando o Agro Sustentável</title>
+    <meta name="description" content="Plataforma de tecnologias regenerativas e soluções inteligentes para o agro do futuro. Conectamos inovação, ancestralidade e sustentabilidade para transformar o campo com sabedoria, força e beleza." />
+    <meta name="keywords" content="Agroverso, agro, sustentabilidade, agricultura regenerativa, tecnologias verdes, ESG, agro digital, inteligência agroambiental, inovação rural" />
+    <meta name="author" content="Instituto Graciliana Maria da Conceição" />
+    <meta name="theme-color" content="#0B3D91" />
+    <meta name="language" content="pt-BR" />
+    <meta name="robots" content="index, follow" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
 
-    <!-- Ícones para diferentes navegadores e dispositivos -->
-    <link rel="icon" type="image/png" sizes="32x32" href="/src/assets/images/favicon_agroverso.png" />
-    <link rel="apple-touch-icon" href="/src/assets/images/favicon_agroverso.png" />
+    <!-- 🧩 Manifesto e ícones PWA -->
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 
-    <!-- Fontes Oficiais (Google Fonts) -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@500&family=Open+Sans&display=swap" rel="stylesheet" />
-
-    <!-- Open Graph (para redes sociais como Facebook, LinkedIn) -->
+    <!-- 🌐 Open Graph (Facebook, LinkedIn) -->
     <meta property="og:title" content="Agroverso | Revolucionando o Agro Sustentável" />
-    <meta property="og:description" content="Tecnologia avançada conectada à sabedoria ancestral." />
-    <meta property="og:image" content="/src/assets/images/og_thumbnail.png" />
-    <meta property="og:type" content="website" />
+    <meta property="og:description" content="Tecnologias regenerativas e soluções inteligentes para o agro do futuro. Conectamos inovação e sabedoria ancestral para impactar o planeta com propósito." />
+    <meta property="og:image" content="/assets/og_thumbnail.jpg" />
+    <meta property="og:image:alt" content="Visual institucional da plataforma Agroverso" />
     <meta property="og:url" content="https://agroverso.tec.br" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Agroverso" />
+    <meta property="og:locale" content="pt_BR" />
 
-    <!-- Twitter Card (X/Twitter) -->
+    <!-- 🐦 Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Agroverso | Revolucionando o Agro Sustentável" />
-    <meta name="twitter:description" content="Tecnologia avançada conectada à sabedoria ancestral." />
-    <meta name="twitter:image" content="/src/assets/images/og_thumbnail.png" />
+    <meta name="twitter:description" content="Tecnologias regenerativas para transformar o campo com inovação e sabedoria." />
+    <meta name="twitter:image" content="/assets/og_thumbnail.jpg" />
+    <meta name="twitter:site" content="@agroverso" />
+    <meta name="twitter:creator" content="@agroverso" />
+    <!-- 🖋️ Fontes (Google Fonts) -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@500&family=Open+Sans&display=swap"
+      rel="stylesheet"
+    />
 
-    <!-- Tailwind será injetado via Vite -->
+    <!-- ✅ Tailwind será injetado automaticamente via Vite -->
   </head>
 
-  <body class="bg-white text-grayIntelligent antialiased scroll-smooth">
+  <body class="bg-white text-gray-800 dark:bg-gray-900 dark:text-gray-100 antialiased scroll-smooth selection:bg-blue-300 selection:text-white">
+    <!-- ⚛️ Ponto de montagem da aplicação React -->
     <div id="root"></div>
 
-    <!-- Script de entrada da aplicação React/Vite -->
+    <!-- 🚫 JavaScript desativado -->
+    <noscript>
+      <div style="padding: 2rem; text-align: center;">
+        <h1 style="font-family: 'Montserrat', sans-serif;">JavaScript Desativado</h1>
+        <p>Para visualizar corretamente a plataforma Agroverso, ative o JavaScript no seu navegador.</p>
+      </div>
+    </noscript>
+
+    <!-- 🚀 Script principal da aplicação React com Vite -->
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
+
+<!--
+  ============================================
+  🔚 Fim do arquivo public/index.html
+  🔒 Protegido por sabedoria, força e beleza
+  🌱 Agroverso – Todos os direitos reservados
+  ============================================
+-->
