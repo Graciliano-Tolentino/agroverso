@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "nome": "Administrador Padrão",
+    "usuario": "admin@agroverso.tec.br",
+    "senha": "MTIzNDU2",  // base64 de 123456
+    "perfil": "Administrador",
+    "tipo": "Interno",
+    "permissoes": ["usuarios:gerenciar", "sistema:configurar", "relatorios:ver"]
+  },
+  {
+    "id": 2,
+    "nome": "Técnico de Campo",
+    "usuario": "tecnico@agroverso.tec.br",
+    "senha": "dGVjbmljbzEyMw==",  // base64 de tecnico123
+    "perfil": "Técnico",
+    "tipo": "Operacional",
+    "permissoes": ["leituras:registrar", "clientes:visualizar"]
+  },
+  {
+    "id": 3,
+    "nome": "Consultor Comercial",
+    "usuario": "consultor@agroverso.tec.br",
+    "senha": "dmVuZGFzMjAyNQ==",  // base64 de vendas2025
+    "perfil": "Consultor",
+    "tipo": "Externo",
+    "permissoes": ["clientes:consultar", "vendas:iniciar", "relatorios:acesso-limitado"]
+  }
+]
