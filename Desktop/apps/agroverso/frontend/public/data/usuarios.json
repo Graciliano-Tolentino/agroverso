@@ -1,0 +1,59 @@
+[
+  {
+    "id": "user-001",
+    "nome": "Joana Silva",
+    "email": "joana@agroverso.tec.br",
+    "perfil": "administrador",
+    "ativo": true,
+    "ultimoAcesso": "2025-05-20T14:32:00Z",
+    "criadoEm": "2024-03-12T09:00:00Z",
+    "telefone": "(11) 98765-4321",
+    "foto": "/images/avatar_joana.png",
+    "permissoes": [
+      "usuarios:gerenciar",
+      "certificados:emitir",
+      "relatorios:ver"
+    ]
+  },
+  {
+    "id": "user-002",
+    "nome": "Carlos Oliveira",
+    "email": "carlos@agroverso.tec.br",
+    "perfil": "consultor",
+    "ativo": true,
+    "ultimoAcesso": "2025-05-21T09:10:00Z",
+    "criadoEm": "2024-07-01T10:15:00Z",
+    "telefone": "(11) 91234-5678",
+    "foto": "/images/avatar_carlos.png",
+    "permissoes": [
+      "certificados:emitir"
+    ]
+  },
+  {
+    "id": "user-003",
+    "nome": "Maria Santos",
+    "email": "maria@agroverso.tec.br",
+    "perfil": "leitor",
+    "ativo": false,
+    "ultimoAcesso": null,
+    "criadoEm": "2024-05-30T08:00:00Z",
+    "telefone": "(11) 99876-5432",
+    "foto": null,
+    "permissoes": []
+  },
+  {
+    "id": "user-004",
+    "nome": "Luiz Ferreira",
+    "email": "luiz@agroverso.tec.br",
+    "perfil": "suporte",
+    "ativo": true,
+    "ultimoAcesso": "2025-05-22T16:48:00Z",
+    "criadoEm": "2024-09-15T10:10:00Z",
+    "telefone": "(21) 99876-1234",
+    "foto": null,
+    "permissoes": [
+      "usuarios:ver",
+      "certificados:verificar"
+    ]
+  }
+]

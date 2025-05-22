@@ -1,0 +1,6 @@
+# robots.txt – Agroverso
+
+User-agent: *
+Allow: /
+
+Sitemap: https://agroverso.tec.br/sitemap.xml

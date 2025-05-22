@@ -1,0 +1,39 @@
+
+[
+  {
+    "id": "admin-001",
+    "usuario": "admin",
+    "senha": "123456",
+    "nome": "Admin Principal"
+  },
+  {
+    "id": "admin-002",
+    "usuario": "coordenacao",
+    "senha": "senha@2025",
+    "nome": "Coordenação Agroverso"
+  },
+  {
+    "id": "admin-003",
+    "usuario": "ti",
+    "senha": "admin123ti",
+    "nome": "Suporte Técnico – TI Agroverso"
+  },
+  {
+    "id": "admin-004",
+    "usuario": "secretaria",
+    "senha": "sec@graciliana",
+    "nome": "Secretaria Técnica do Instituto"
+  },
+  {
+    "id": "admin-005",
+    "usuario": "rh",
+    "senha": "rh@agroverso",
+    "nome": "Recursos Humanos – Agroverso"
+  },
+  {
+    "id": "admin-006",
+    "usuario": "diretoria",
+    "senha": "dir2025",
+    "nome": "Diretoria Executiva do Instituto"
+  }
+]
