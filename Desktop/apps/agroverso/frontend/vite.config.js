@@ -2,14 +2,16 @@
 // 🚀 Agroverso High Tech | Configuração Definitiva do Vite
 // 🌱 Ambiente: Desenvolvimento, Produção e Deploy Vercel
 // 📄 Arquivo: vite.config.js
-// 🗓️ Última atualização: 20/05/2025
+// 🗓️ Atualizado: 22/05/2025
 // 👨‍💻 Equipe: Agroverso Tech
-// ✍️ Desenvolvido com sabedoria, força e beleza
+// ✍️ Desenvolvido com sabedoria, força e beleza – v12/10
 // =======================================================
 
 import { defineConfig, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react';
 import compression from 'vite-plugin-compression';
+import autoprefixer from 'autoprefixer';
+import cssnano from 'cssnano';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { dirname } from 'node:path';
@@ -21,6 +23,7 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
 
   return {
+    base: '/',
     plugins: [
       react(),
       compression({ algorithm: 'brotliCompress' })
@@ -28,10 +31,12 @@ export default defineConfig(({ mode }) => {
     resolve: {
       alias: {
         '@': path.resolve(__dirname, 'src'),
-        '@components': path.resolve(__dirname, 'src/components'),
+        '@components': path.resolve(__dirname, 'src/components')
       }
     },
-    base: '/',
+    define: {
+      __APP_ENV__: JSON.stringify(env.APP_ENV || 'development')
+    },
     server: {
       host: '0.0.0.0',
       port: 3000,
@@ -41,15 +46,24 @@ export default defineConfig(({ mode }) => {
         overlay: true
       }
     },
-    define: {
-      __APP_ENV__: JSON.stringify(env.APP_ENV || 'development')
+    css: {
+      postcss: {
+        plugins: [
+          autoprefixer(),
+          cssnano({ preset: 'default' })
+        ]
+      }
     },
     build: {
       outDir: 'dist',
       sourcemap: env.APP_ENV === 'staging',
       chunkSizeWarningLimit: 500,
       minify: 'terser',
-      terserOptions: { compress: { drop_console: true } },
+      terserOptions: {
+        compress: {
+          drop_console: true
+        }
+      },
       rollupOptions: {
         output: {
           manualChunks(id) {
@@ -62,14 +76,6 @@ export default defineConfig(({ mode }) => {
             }
           }
         }
-      }
-    },
-    css: {
-      postcss: {
-        plugins: [
-          require('autoprefixer'),
-          require('cssnano')({ preset: 'default' })
-        ]
       }
     }
   };
