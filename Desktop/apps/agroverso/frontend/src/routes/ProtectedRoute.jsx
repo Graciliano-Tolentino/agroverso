@@ -1,43 +1,28 @@
-/*
-  ==============================================================================
-  📄 Componente: ProtectedRoute v1.6
-  📁 Caminho: src/routes/ProtectedRoute.jsx
-  ✍️ Autor: Graciliano Tolentino
-  📆 Atualizado em: 21/05/2025
-  🎯 Finalidade:
-       • Segurança modular com RBAC e contexto validado
-       • Feedback visual acessível e empático
-       • Fallback dinâmico com roteamento controlado
-       • Log técnico, funcional e analítico em múltiplos canais
+// =====================================================================================
+// 📄 ProtectedRoute.jsx | Agroverso – Roteamento Protegido Universal (v2.1)
+// =====================================================================================
+// ✨ Refatorado com sabedoria, força e beleza – Padrão Técnico Agroverso 12/10
+// =====================================================================================
 
-  🔐 Segurança:
-       • RBAC validado com normalização defensiva
-       • Hook testável e desacoplado
-       • Safe access: `user?.role` tratado
-
-  📈 Auditoria:
-       • GTM + Sentry + LogRocket + DataDog
-       • `console.info()` aplicado com clareza
-
-  ♿ Acessibilidade:
-       • `aria-live="assertive"` aplicado a mensagens visuais
-       • Totalmente adaptável a screen readers e leitores braille digitais
-
-  ✨ Desenvolvido com sabedoria, força e beleza – Agroverso Padrão 12/10
-  ==============================================================================
-*/
-
-import React, { lazy, Suspense } from 'react';
+import React, { lazy, Suspense, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { Navigate, useLocation } from 'react-router-dom';
 
 import { useAuth } from '@/context/AuthContext';
 import { useProtectedAccess } from '@/hooks/useProtectedAccess';
-import { mensagens } from '@/constants/mensagensProtectedRoute'; // ⬅️ mensagens externas padronizadas
-import { fallback403 as fallbackDefault } from '@/constants/config';
+import { mensagens } from '@/constants/mensagensProtectedRoute';
+import { config } from '@/constants/config';
 import { logger } from '@/utils/logger';
+import { trackAccessDenied } from '@/utils/telemetry/trackAccessDenied';
 
+const fallbackDefault = config.fallback403 ?? '/403';
 const AvisoRedirecionamento = lazy(() => import('@/components/ui/AvisoRedirecionamento'));
+
+function getMensagemContextual(pathname) {
+  if (pathname.startsWith('/admin')) return mensagens.verificandoAdmin;
+  if (pathname.startsWith('/user')) return mensagens.verificandoUser;
+  return mensagens.verificandoPadrao;
+}
 
 const ProtectedRoute = ({
   children,
@@ -50,22 +35,22 @@ const ProtectedRoute = ({
   const { user, token, loading } = useAuth();
   const rotaAtual = location.pathname;
 
-  // ✅ Normalização de roles
-  const rolesNorm = typeof roles === 'string' ? [roles] : roles;
+  // ✅ Memoização de roles
+  const rolesNorm = useMemo(() => (
+    typeof roles === 'string' ? [roles] : roles
+  ), [roles]);
 
-  // ✅ Mensagem personalizada com base na rota
-  const mensagemContextual = mensagemFallback ?? (
-    rotaAtual.startsWith('/admin')
-      ? mensagens.verificandoAdmin
-      : rotaAtual.startsWith('/user')
-      ? mensagens.verificandoUser
-      : mensagens.verificandoPadrao
-  );
+  // ✅ Mensagem contextual por padrão
+  const mensagemContextual = mensagemFallback ?? getMensagemContextual(rotaAtual);
 
   const { autorizado, erros } = useProtectedAccess({ token, user, roles: rolesNorm });
 
   const renderAviso = ({ mensagem, destino, tempo = 3000 }) => (
-    <Suspense fallback={<div role="status" aria-live="assertive" className="text-center py-4">Verificando acesso...</div>}>
+    <Suspense fallback={
+      <div role="status" aria-live="assertive" className="text-center py-4 text-gray-600 dark:text-gray-400">
+        Verificando acesso...
+      </div>
+    }>
       <AvisoRedirecionamento
         tempo={tempo}
         destino={destino}
@@ -75,31 +60,32 @@ const ProtectedRoute = ({
     </Suspense>
   );
 
-  // ⏳ Estado de carregamento
+  // ⏳ Sessão em verificação
   if (loading) {
     return visualFallback ?? renderAviso({ mensagem: mensagemContextual });
   }
 
-  // ❌ Sessão inválida
-  if (erros.includes('401') || erros.includes('498')) {
-    logger.info('[ProtectedRoute] Sessão inválida ou expirada', { token, rota: rotaAtual });
-    return renderAviso({ mensagem: mensagens.expirado, destino: '/login' });
-  }
+  const erroSet = new Set(erros);
 
-  // ❌ Acesso negado
-  if (erros.includes('403')) {
-    const safeRole = user?.role ?? '__undefined__';
-    logger.info('[ProtectedRoute] Acesso negado', { userRole: safeRole, esperado: rolesNorm, rota: rotaAtual });
-
-    window.dataLayer?.push({
-      event: 'acesso_negado_rbac',
-      role: safeRole,
-      esperado: rolesNorm,
+  // ❌ Sessão expirada
+  if (erroSet.has('401') || erroSet.has('498')) {
+    logger.info('[ProtectedRoute] Sessão inválida ou expirada', {
+      token,
       rota: rotaAtual,
     });
 
-    window.LogRocket?.track('rbac_block');
-    window.DD_LOGS?.logger.info('RBAC_BLOCK', { rota: rotaAtual, role: safeRole });
+    return renderAviso({ mensagem: mensagens.expirado, destino: '/login' });
+  }
+
+  // ❌ RBAC negado
+  if (erroSet.has('403')) {
+    const safeRole = user?.role ?? '__undefined__';
+
+    trackAccessDenied({
+      userRole: safeRole,
+      esperado: rolesNorm,
+      rota: rotaAtual,
+    });
 
     return renderAviso({ mensagem: mensagens.negado, destino: fallback403 });
   }
@@ -114,33 +100,21 @@ const ProtectedRoute = ({
   );
 };
 
-ProtectedRoute.propTypes = {
-  /**
-   * Componentes filhos renderizados quando a autorização for válida
-   */
+// 📘 Tipagem exportada para documentação automática (Agroverso DX)
+export const ProtectedRoutePropTypes = {
   children: PropTypes.node.isRequired,
-
-  /**
-   * Lista de papéis permitidos (ex: ['admin', 'editor'])
-   */
-  roles: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.string), PropTypes.string]),
-
-  /**
-   * Componente a ser exibido enquanto a sessão é verificada
-   */
+  roles: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.string),
+    PropTypes.string,
+  ]),
   visualFallback: PropTypes.node,
-
-  /**
-   * Mensagem personalizada durante verificação da sessão
-   */
   mensagemFallback: PropTypes.string,
-
-  /**
-   * Rota fallback alternativa ao padrão `/403`
-   */
   fallback403: PropTypes.string,
 };
 
+ProtectedRoute.propTypes = ProtectedRoutePropTypes;
+
+// 🔧 Padrões seguros
 ProtectedRoute.defaultProps = {
   roles: [],
   visualFallback: null,
@@ -148,12 +122,7 @@ ProtectedRoute.defaultProps = {
   fallback403: '/403',
 };
 
-export default ProtectedRoute;
+// 🧠 Ajuda no React DevTools, testes, e debug visual
+ProtectedRoute.displayName = 'ProtectedRoute';
 
-/*
-  ==============================================================================
-  🔚 Fim do componente ProtectedRoute v1.6
-  🧠 Modular, acessível, seguro e rastreável em múltiplos canais
-  🌍 Agroverso – Blindagem invisível, clareza visível, elegância previsível
-  ==============================================================================
-*/
+export default ProtectedRoute;

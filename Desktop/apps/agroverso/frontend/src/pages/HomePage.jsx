@@ -1,12 +1,11 @@
 /*
   ===================================================================
-  📄 HomePage.jsx | Agroverso – Página Inicial da Plataforma (v2.1)
+  📄 HomePage.jsx | Agroverso – Página Inicial da Plataforma (v3.0)
   📁 Diretório: src/pages/
   🎯 Finalidade:
       • Modularidade declarativa com lazy loading acessível
       • UX suave com animação condicional por acessibilidade
-      • Renderização orientada a dados
-      • PropTypes integrados e seções testáveis
+      • Importações absolutas para máxima legibilidade e robustez
 
   🌟 Desenvolvido com sabedoria, força e beleza – Agroverso 12/10
   ===================================================================
@@ -16,14 +15,17 @@ import React, { lazy, Suspense } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { getDefaultTransition } from '@/utils/animations';
 
-const MarketplaceSection = lazy(() => import('./MarketplaceSection'));
-const BlogSection = lazy(() => import('./BlogSection'));
-
-import Hero from './Hero';
-import CoursesSection from './CoursesSection';
-import CommunitySection from './CommunitySection';
+// ✅ Importações atualizadas com base em alias
+import Hero from '@/components/common/Hero';
+import CoursesSection from '@/components/education/CoursesSection';
+import CommunitySection from '@/components/community/CommunitySection';
 import Button from '@/components/ui/Button';
 
+// ✅ Lazy loading otimizado
+const MarketplaceSection = lazy(() => import('@/components/marketplace/MarketplaceSection'));
+const BlogSection = lazy(() => import('@/components/blog/BlogSection'));
+
+// 🧪 Dados simulados para exibição temporária
 const produtosMock = [
   { id: 1, name: 'Estufa automatizada', price: 'R$1200' },
   { id: 2, name: 'Controlador climático', price: 'R$850' },
@@ -36,13 +38,17 @@ const blogMock = [
 
 export default function HomePage() {
   const prefersReducedMotion = useReducedMotion();
-  const animation = prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 };
+  const animation = prefersReducedMotion
+    ? { opacity: 1, y: 0 }
+    : { opacity: 0, y: 30 };
 
   return (
     <>
+      {/* 🌄 Seção Hero */}
       <Hero />
 
       <main className="flex flex-col gap-20">
+
         {/* 🛒 Produtos em Destaque */}
         <motion.section
           id="marketplace"
@@ -61,15 +67,14 @@ export default function HomePage() {
               Tecnologias regenerativas e soluções sustentáveis para transformar o agro.
             </p>
           </div>
-          <Suspense
-            fallback={
-              <div role="status" aria-live="polite" className="animate-pulse grid grid-cols-1 md:grid-cols-3 gap-4">
-                {[...Array(3)].map((_, i) => (
-                  <div key={i} className="h-48 bg-gray-200 rounded-md dark:bg-gray-700" />
-                ))}
-              </div>
-            }
-          >
+
+          <Suspense fallback={
+            <div role="status" aria-live="polite" className="animate-pulse grid grid-cols-1 md:grid-cols-3 gap-4">
+              {[...Array(3)].map((_, i) => (
+                <div key={i} className="h-48 bg-gray-200 rounded-md dark:bg-gray-700" />
+              ))}
+            </div>
+          }>
             <MarketplaceSection products={produtosMock} />
           </Suspense>
         </motion.section>
@@ -116,15 +121,13 @@ export default function HomePage() {
               Atualizações sobre o agro regenerativo, inovação tecnológica e histórias inspiradoras.
             </p>
           </div>
-          <Suspense
-            fallback={
-              <div role="status" aria-live="polite" className="animate-pulse grid grid-cols-1 md:grid-cols-2 gap-4">
-                {[...Array(2)].map((_, i) => (
-                  <div key={i} className="h-32 bg-gray-200 rounded-md dark:bg-gray-700" />
-                ))}
-              </div>
-            }
-          >
+          <Suspense fallback={
+            <div role="status" aria-live="polite" className="animate-pulse grid grid-cols-1 md:grid-cols-2 gap-4">
+              {[...Array(2)].map((_, i) => (
+                <div key={i} className="h-32 bg-gray-200 rounded-md dark:bg-gray-700" />
+              ))}
+            </div>
+          }>
             <BlogSection posts={blogMock} />
           </Suspense>
           <div className="mt-10 text-center">
@@ -159,14 +162,3 @@ export default function HomePage() {
     </>
   );
 }
-
-/*
-  ===================================================================
-  🔚 Fim do Componente: HomePage.jsx (v2.1)
-  🚀 UX modular, acessível e animada
-  🔁 Seções prop-driven com carregamento assíncrono e estrutura reutilizável
-  ♿ Preparado para usuários com redução de movimento (WCAG 2.1)
-  🧠 Mantenedor: Equipe Agroverso | https://agroverso.tec.br
-  📆 Última atualização: 21/05/2025
-  ===================================================================
-*/

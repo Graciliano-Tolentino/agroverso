@@ -1,9 +1,8 @@
 // =====================================================================================
-// 📄 AuthContext.jsx (v3.4) | Agroverso – Autenticação Global com Arquitetura Modular
+// 📄 AuthContext.jsx (v3.5) | Agroverso – Autenticação Global com Exportação Nomeada
 // =====================================================================================
-// Integra login real com AuthService e login simulado com auth.fake.ts
-// Usuários simulados com base64, RBAC, perfil e verificação de conta ativa
-// Desenvolvido com sabedoria, força e beleza — padrão técnico 12/10
+// ✅ Corrigido para exportar AuthContext de forma nomeada, compatível com Vite/Rollup
+// ✅ Recomendado para setups com múltiplos hooks e múltiplos providers coexistentes
 // =====================================================================================
 
 import React, {
@@ -16,7 +15,7 @@ import React, {
 import { v4 as uuidv4 } from 'uuid';
 
 import { AuthService } from '../services/auth/authService';
-import { loginFake } from '../services/auth/auth.fake'; // ✅ Lógica fake extraída
+import { loginFake } from '../services/auth/auth.fake';
 
 import {
   getToken,
@@ -26,7 +25,8 @@ import {
 } from '../services/auth/authStorage';
 import { isFakeAuthEnabled } from '@/utils/authMode';
 
-const AuthContext = createContext(undefined);
+// ✅ Exportação nomeada corrigida
+export const AuthContext = createContext(undefined);
 AuthContext.displayName = 'AuthContext';
 
 export const AuthProvider = ({ children }) => {
@@ -84,10 +84,7 @@ export const AuthProvider = ({ children }) => {
         setIsAuthenticated(true);
       }
 
-      console.info('[AuthContext] Login bem-sucedido', {
-        email,
-        traceId: authTraceId,
-      });
+      console.info('[AuthContext] Login bem-sucedido', { email, traceId: authTraceId });
     } catch (err) {
       console.error('[AuthContext] Falha no login', {
         error: err.message,
@@ -99,6 +96,7 @@ export const AuthProvider = ({ children }) => {
       setLoading(false);
     }
   };
+
   const logout = (redirect = true) => {
     AuthService.logout();
     clearSession();
@@ -121,7 +119,7 @@ export const AuthProvider = ({ children }) => {
       setError,
       traceId: authTraceId,
     };
-    return Object.freeze(state); // ✅ Proteção contra mutações acidentais
+    return Object.freeze(state); // 🔒 Protege contra mutações externas
   }, [user, token, isAuthenticated, loading, error, authTraceId]);
 
   return (
@@ -132,9 +130,8 @@ export const AuthProvider = ({ children }) => {
 };
 
 /**
- * Hook seguro para acesso ao contexto de autenticação.
- * @param {Object} options
- * @param {boolean} options.fallbackIfEmpty - Se true, retorna objeto vazio em vez de lançar erro
+ * 🔓 Hook seguro para acesso ao contexto de autenticação
+ * Protegido contra uso fora do <AuthProvider> e compatível com SSR
  */
 export function useAuth({ fallbackIfEmpty = false } = {}) {
   const context = useContext(AuthContext);

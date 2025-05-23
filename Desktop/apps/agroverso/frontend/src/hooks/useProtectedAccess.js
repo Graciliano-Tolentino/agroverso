@@ -21,7 +21,8 @@
   ==============================================================================
 */
 
-import jwtDecode from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
+
 
 export function useProtectedAccess({ token, user, roles = [] }) {
   const erros = [];

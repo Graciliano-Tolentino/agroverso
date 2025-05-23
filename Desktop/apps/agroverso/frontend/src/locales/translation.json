@@ -1,0 +1,16 @@
+{
+  "dashboard": {
+    "titulo": "Painel Administrativo",
+    "descricao": "Visão geral da operação e métricas da plataforma Agroverso.",
+    "usuarios_ativos": "Usuários ativos",
+    "cursos_publicados": "Cursos publicados",
+    "certificados_emitidos": "Certificados emitidos",
+    "acessos_mes": "Acessos no mês",
+    "tooltip": {
+      "usuarios_ativos": "Total de usuários com sessão ativa nas últimas 24h.",
+      "cursos_publicados": "Cursos publicados por instrutores ativos.",
+      "certificados_emitidos": "Certificados digitais gerados pela plataforma.",
+      "acessos_mes": "Quantidade de sessões únicas registradas neste mês."
+    }
+  }
+}

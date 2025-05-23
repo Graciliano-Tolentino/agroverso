@@ -1,12 +1,1 @@
-{
-  "projectId": "prj_agroverso_hightech",
-  "orgId": "org_graciliano_tolentino",
-  "settings": {
-    "framework": "vite",
-    "buildCommand": "npm run build",
-    "devCommand": "npm run dev",
-    "outputDirectory": "dist",
-    "installCommand": "npm install",
-    "rootDirectory": null
-  }
-}
+{"projectId":"prj_Bdgv6nAbOizkXZiPBpzJPAtOy9jL","orgId":"team_lUchKwa7KuAuDtnCi5zjLzkC"}
