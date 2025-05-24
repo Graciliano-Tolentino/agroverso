@@ -72,6 +72,7 @@
     "cypress": "^13.9.0",
     "cypress-axe": "^1.0.0",
     "cz-conventional-changelog": "^3.3.0",
+    "esbuild": "^0.25.4",
     "eslint": "^8.57.0",
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-import": "^2.29.1",
@@ -87,7 +88,7 @@
     "snyk": "^1.1285.0",
     "tailwindcss": "^4.1.6",
     "terser": "^5.30.4",
-    "vite": "^5.4.19",
+    "vite": "^6.3.5",
     "vite-plugin-compression": "^0.5.1",
     "vitest": "^3.1.4"
   },
