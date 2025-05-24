@@ -1,0 +1,64 @@
+/* 🎨 index.css – Estilo global regenerativo Agroverso com Tailwind */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 🌿 Corpo com clareza, contraste e legibilidade */
+body {
+  @apply bg-white text-grayIntelligent antialiased leading-relaxed tracking-wide font-opensans;
+}
+
+/* 🌱 Cabeçalhos com tipografia marcante e presença */
+h1, h2, h3, h4 {
+  @apply font-montserrat text-greenRegenerative font-bold;
+}
+
+/* ✏️ Parágrafos equilibrados */
+p {
+  @apply text-sm text-grayIntelligent leading-relaxed;
+}
+
+/* 🔗 Links regenerativos com transição suave */
+a {
+  @apply text-greenRegenerative hover:text-blueWisdom transition-colors duration-200;
+}
+
+/* 🔒 Links institucionais de rodapé */
+.footer-link {
+  @apply text-grayIntelligent hover:text-greenRegenerative text-sm;
+}
+
+/* 📦 Seções com espaçamento natural */
+section {
+  @apply py-12 px-6 sm:px-10;
+}
+
+/* 🔘 Botões padronizados */
+button {
+  @apply font-semibold px-6 py-3 rounded-lg shadow-sm transition duration-200;
+}
+
+/* ✅ Botão primário */
+.btn-primary {
+  @apply bg-greenRegenerative text-white hover:bg-green-600;
+}
+
+/* 🔵 Botão secundário */
+.btn-secondary {
+  @apply bg-blueWisdom text-white hover:bg-blue-700;
+}
+
+/* ⚠️ Aviso ou alerta */
+.alert {
+  @apply text-sm font-semibold px-4 py-3 rounded bg-yellowEnergy text-gray-800;
+}
+
+/* ✅ Sucesso */
+.success {
+  @apply text-greenRegenerative;
+}
+
+/* ❌ Erro */
+.error {
+  @apply text-redAlert;
+}

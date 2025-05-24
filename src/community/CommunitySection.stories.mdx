@@ -1,0 +1,60 @@
+import { Meta, Story, Preview, Description } from '@storybook/addon-docs';
+import CommunitySection from './CommunitySection';
+
+<Meta title="Agroverso/Comunidade/CommunitySection" component={CommunitySection} />
+
+# 🌱 CommunitySection – Agroverso
+
+Seção dedicada à exibição de membros da comunidade com foco em:
+
+- ✅ Acessibilidade (`role="region"`, `aria-labelledby`)
+- 🎨 Identidade visual com tokens (`.card-entity`, `.action-button`)
+- 🧩 Modularização (`MemberCard`, `getMembros`)
+- 🌐 Internacionalização futura com `t('comunidade.*')`
+
+<Description>
+Este componente representa uma área institucional para conectar produtores, pesquisadores e agentes do ecossistema Agroverso.
+</Description>
+
+<Preview withToolbar>
+  <Story name="Estado padrão – membros carregados">
+    <CommunitySection />
+  </Story>
+
+  <Story name="Carregando membros – simulado">
+    {() => (
+      <section
+        className="py-16 px-6 bg-gray-50 dark:bg-gray-900 text-center"
+        role="status"
+        aria-label="Carregando membros"
+      >
+        <p className="text-lg text-gray-600 dark:text-gray-300 animate-pulse">
+          Carregando membros da comunidade...
+        </p>
+      </section>
+    )}
+  </Story>
+
+  <Story name="Erro no carregamento">
+    {() => (
+      <section
+        className="py-16 px-6 bg-white dark:bg-gray-900 text-center"
+        role="alert"
+        aria-label="Erro ao carregar"
+      >
+        <p className="text-red-600 dark:text-red-400">
+          Erro ao carregar membros da comunidade.
+        </p>
+      </section>
+    )}
+  </Story>
+</Preview>
+
+---
+
+### 📘 Notas
+
+- A estrutura pode ser integrada com `controls` se o componente for parametrizado com props como `membros`, `erro`, `carregando`.
+- As histórias refletem os três estados fundamentais: `padrão`, `carregando`, `falha`.
+
+---

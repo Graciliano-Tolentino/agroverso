@@ -1,0 +1,62 @@
+[
+  {
+    "id": "fake-cert-001",
+    "nomeCompleto": "Joana Silva",
+    "nomeCurso": "Tecnologias Regenerativas no Agronegócio",
+    "dataConclusao": "2025-04-15",
+    "orgaoEmissor": "Instituto Graciliana Maria da Conceição",
+    "assinaturaDigital": "FAKE-JWT-CERTIFICADO-001",
+    "formato": "padrao",
+    "local": "Cotia/SP",
+    "cargaHoraria": 40,
+    "tema": "agroecologia",
+    "certificadoURL": "https://certificados.agroverso.tec.br/validar?codigo=FAKE-JWT-CERTIFICADO-001",
+    "nivelCurso": "avançado",
+    "idioma": "pt-BR"
+  },
+  {
+    "id": "fake-cert-002",
+    "nomeCompleto": "Carlos Oliveira",
+    "nomeCurso": "Introdução à Energia Solar Fotovoltaica",
+    "dataConclusao": "2025-03-22",
+    "orgaoEmissor": "Agroverso High Tech",
+    "assinaturaDigital": "FAKE-JWT-CERTIFICADO-002",
+    "formato": "premium",
+    "local": "Barra Bonita/SP",
+    "cargaHoraria": 20,
+    "tema": "energia",
+    "certificadoURL": "https://certificados.agroverso.tec.br/validar?codigo=FAKE-JWT-CERTIFICADO-002",
+    "nivelCurso": "introdutório",
+    "idioma": "pt-BR"
+  },
+  {
+    "id": "fake-cert-003",
+    "nomeCompleto": "Maria Santos",
+    "nomeCurso": "Sistemas de Irrigação Inteligente",
+    "dataConclusao": "2025-05-10",
+    "orgaoEmissor": "Agroverso Academia",
+    "assinaturaDigital": "FAKE-JWT-CERTIFICADO-003",
+    "formato": "minimalista",
+    "local": "São Roque/SP",
+    "cargaHoraria": 30,
+    "tema": "hidroponia",
+    "certificadoURL": "https://certificados.agroverso.tec.br/validar?codigo=FAKE-JWT-CERTIFICADO-003",
+    "nivelCurso": "intermediário",
+    "idioma": "pt-BR"
+  },
+  {
+    "id": "fake-cert-004",
+    "nomeCompleto": "Ana Lúcia Reis",
+    "nomeCurso": "Biofertilizantes Naturais",
+    "dataConclusao": "2025-06-05",
+    "orgaoEmissor": "Agroverso Instituto",
+    "assinaturaDigital": "FAKE-JWT-CERTIFICADO-004",
+    "formato": "padrao",
+    "local": "Ilhabela/SP",
+    "cargaHoraria": 25,
+    "tema": "agroecologia",
+    "certificadoURL": "https://certificados.agroverso.tec.br/validar?codigo=FAKE-JWT-CERTIFICADO-004",
+    "nivelCurso": "introdutório",
+    "idioma": "pt-BR"
+  }
+]
