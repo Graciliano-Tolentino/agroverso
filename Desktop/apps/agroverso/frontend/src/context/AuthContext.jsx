@@ -1,8 +1,9 @@
 // =====================================================================================
-// 📄 AuthContext.jsx (v3.5) | Agroverso – Autenticação Global com Exportação Nomeada
+// 📄 AuthContext.jsx | Agroverso – Contexto Seguro de Autenticação (v5.0)
 // =====================================================================================
-// ✅ Corrigido para exportar AuthContext de forma nomeada, compatível com Vite/Rollup
-// ✅ Recomendado para setups com múltiplos hooks e múltiplos providers coexistentes
+// 🎯 Finalidade:
+//     • Centralizar estado e ações de autenticação com rastreabilidade e fallback seguro.
+//     • Compatível com ambientes SSR, fakeAuth, i18n e controle de erros refinado.
 // =====================================================================================
 
 import React, {
@@ -23,9 +24,9 @@ import {
   saveSession,
   clearSession,
 } from '../services/auth/authStorage';
+
 import { isFakeAuthEnabled } from '@/utils/authMode';
 
-// ✅ Exportação nomeada corrigida
 export const AuthContext = createContext(undefined);
 AuthContext.displayName = 'AuthContext';
 
@@ -35,12 +36,12 @@ export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(!!getToken());
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [authTraceId] = useState(() => uuidv4());
+  const [traceId] = useState(() => uuidv4());
 
   useEffect(() => {
-    const initialize = async () => {
-      const storedToken = getToken();
-      if (!storedToken) {
+    const inicializar = async () => {
+      const tokenSalvo = getToken();
+      if (!tokenSalvo) {
         clearSession();
         setIsAuthenticated(false);
         setLoading(false);
@@ -49,21 +50,21 @@ export const AuthProvider = ({ children }) => {
 
       try {
         if (!isFakeAuthEnabled()) {
-          const me = await AuthService.me();
-          setUser(me);
+          const usuario = await AuthService.me();
+          setUser(usuario);
           setIsAuthenticated(true);
-          console.info('[AuthContext] Sessão validada', { traceId: authTraceId });
+          console.info('[AuthContext] Sessão validada', { traceId });
         }
       } catch (err) {
-        console.warn('[AuthContext] Sessão inválida. Logout automático.', { traceId: authTraceId });
+        console.warn('[AuthContext] Falha na sessão. Executando logout automático.', { traceId });
         logout(false);
       } finally {
         setLoading(false);
       }
     };
 
-    initialize();
-  }, [authTraceId]);
+    inicializar();
+  }, [traceId]);
 
   const login = async (email, senha) => {
     setLoading(true);
@@ -84,12 +85,9 @@ export const AuthProvider = ({ children }) => {
         setIsAuthenticated(true);
       }
 
-      console.info('[AuthContext] Login bem-sucedido', { email, traceId: authTraceId });
+      console.info('[AuthContext] Login bem-sucedido', { email, traceId });
     } catch (err) {
-      console.error('[AuthContext] Falha no login', {
-        error: err.message,
-        traceId: authTraceId,
-      });
+      console.error('[AuthContext] Falha no login', { erro: err.message, traceId });
       setError(err.message || 'Erro ao fazer login.');
       setIsAuthenticated(false);
     } finally {
@@ -98,17 +96,17 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = (redirect = true) => {
-    AuthService.logout();
+    AuthService.logout?.();
     clearSession();
     setUser(null);
     setToken(null);
     setIsAuthenticated(false);
     setError(null);
-    console.info('[AuthContext] Logout executado', { traceId: authTraceId });
+    console.info('[AuthContext] Logout executado', { traceId });
   };
 
-  const value = useMemo(() => {
-    const state = {
+  const value = useMemo(() =>
+    Object.freeze({
       user,
       token,
       isAuthenticated,
@@ -117,10 +115,10 @@ export const AuthProvider = ({ children }) => {
       login,
       logout,
       setError,
-      traceId: authTraceId,
-    };
-    return Object.freeze(state); // 🔒 Protege contra mutações externas
-  }, [user, token, isAuthenticated, loading, error, authTraceId]);
+      traceId,
+    }),
+    [user, token, isAuthenticated, loading, error, traceId]
+  );
 
   return (
     <AuthContext.Provider value={value}>
@@ -130,14 +128,14 @@ export const AuthProvider = ({ children }) => {
 };
 
 /**
- * 🔓 Hook seguro para acesso ao contexto de autenticação
- * Protegido contra uso fora do <AuthProvider> e compatível com SSR
+ * 🔐 useAuth – Acesso seguro ao contexto de autenticação
+ * ✅ Protegido para SSR e ambientes híbridos
  */
 export function useAuth({ fallbackIfEmpty = false } = {}) {
   const context = useContext(AuthContext);
 
   if (!context && fallbackIfEmpty) {
-    console.warn('[useAuth] Contexto ausente. Usando fallback SSR-safe.');
+    console.warn('[useAuth] Contexto ausente. Fallback de leitura ativado.');
     return {
       user: null,
       token: null,
@@ -152,7 +150,7 @@ export function useAuth({ fallbackIfEmpty = false } = {}) {
   }
 
   if (!context) {
-    throw new Error('[useAuth] Este hook só pode ser usado dentro de <AuthProvider>.');
+    throw new Error('[useAuth] Este hook deve ser usado dentro de <AuthProvider>.');
   }
 
   return context;

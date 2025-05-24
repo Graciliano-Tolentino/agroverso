@@ -1,15 +1,15 @@
 // =====================================================================================
-// 📄 AdminCursosPage.jsx | Agroverso – Gestão de Cursos (v3.1)
+// 📄 AdminCursosPage.jsx | Agroverso – Gestão de Cursos com Acessibilidade e Telemetria
 // =====================================================================================
-// 🎓 Listagem dinâmica e gerenciamento refinado de cursos com acessibilidade total
-// 🌐 i18n integrado | 🔍 UX com tooltips acessíveis | 📈 Telemetria ativa | 🔄 API REST
-// ✅ Exportação default compatível com lazy() + React Router
-// ✨ Desenvolvido com sabedoria, força e beleza — Padrão Técnico 12/10 Agroverso
+// 🎯 Finalidade:
+//     • Permitir a administração de cursos com acessibilidade plena, UX refinada e rastreamento de ações.
+//     • Compatível com i18n, dark mode, telemetria e design system institucional.
 // =====================================================================================
 
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import useTelemetry from '@/hooks/useTelemetry';
+
 import {
   Tooltip,
   TooltipTrigger,
@@ -18,7 +18,7 @@ import {
 
 export default function AdminCursosPage() {
   const { t } = useTranslation();
-  const { logEvent } = useTelemetry();
+  const { logEvent } = useTelemetry('admin:cursos');
 
   const [cursos, setCursos] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -26,8 +26,8 @@ export default function AdminCursosPage() {
 
   useEffect(() => {
     logEvent('admin_cursos_view', {
-      timestamp: Date.now(),
       userRole: 'admin',
+      timestamp: Date.now(),
     });
 
     fetch('/api/cursos')
@@ -37,103 +37,93 @@ export default function AdminCursosPage() {
         setLoading(false);
       })
       .catch((err) => {
-        console.error(err);
-        setErro(t('erros.falha_ao_carregar'));
+        console.error('[AdminCursosPage] erro ao carregar', err);
+        setErro(t('erros.falha_ao_carregar', 'Erro ao carregar cursos.'));
         setLoading(false);
       });
   }, []);
 
-  function alternarStatusCurso(id, novoStatus) {
-    fetch(`/api/cursos/${id}`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ publicado: novoStatus }),
-    })
-      .then(() => {
-        setCursos((prev) =>
-          prev.map((c) =>
-            c.id === id ? { ...c, publicado: novoStatus } : c
-          )
-        );
-      })
-      .catch((err) => {
-        console.error('Erro ao alterar status do curso', err);
-      });
-  }
-
-  if (loading) return <p>{t('geral.carregando')}</p>;
-  if (erro) return <p className="text-red-600">{erro}</p>;
+  if (loading) return <p className="text-sm text-gray-600">{t('geral.carregando', 'Carregando...')}</p>;
+  if (erro) return <p className="text-red-600" role="alert">{erro}</p>;
 
   return (
-    <section className="p-6 space-y-6">
-      {/* 🔰 Cabeçalho da Página */}
-      <div>
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-          {t('cursos.titulo')}
+    <section
+      className="p-6 space-y-6"
+      role="region"
+      aria-label={t('cursos.aria.secao', 'Gestão de cursos disponíveis')}
+    >
+      <header>
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2 card-heading">
+          {t('cursos.titulo', 'Cursos')}
         </h1>
-        <p className="text-gray-700 dark:text-gray-300">
-          {t('cursos.descricao')}
+        <p className="text-gray-700 dark:text-gray-300 card-body">
+          {t('cursos.descricao', 'Gerencie os cursos da plataforma Agroverso.')}
         </p>
-      </div>
+      </header>
 
-      {/* 📋 Tabela de Cursos com Legenda Acessível */}
       <div className="overflow-x-auto">
-        <table className="min-w-full bg-white dark:bg-gray-900 rounded-lg shadow-md">
+        <table
+          className="min-w-full bg-white dark:bg-gray-900 rounded-lg shadow-md"
+          aria-label={t('cursos.aria.tabela', 'Tabela de cursos')}
+        >
           <caption className="text-left text-sm text-gray-500 dark:text-gray-400 mb-2">
-            {t('cursos.legenda')}
+            {t('cursos.legenda', 'Lista de cursos publicados e rascunhos')}
           </caption>
           <thead>
             <tr>
-              <th scope="col" className="text-left px-4 py-2 text-gray-700 dark:text-gray-300">
-                {t('cursos.coluna.titulo')}
-              </th>
-              <th scope="col" className="text-left px-4 py-2 text-gray-700 dark:text-gray-300">
-                {t('cursos.coluna.instrutor')}
-              </th>
-              <th scope="col" className="text-left px-4 py-2 text-gray-700 dark:text-gray-300">
-                {t('cursos.coluna.status')}
-              </th>
+              <th scope="col" className="px-4 py-2 text-left">{t('cursos.coluna.titulo', 'Título')}</th>
+              <th scope="col" className="px-4 py-2 text-left">{t('cursos.coluna.instrutor', 'Instrutor')}</th>
+              <th scope="col" className="px-4 py-2 text-left">{t('cursos.coluna.status', 'Status')}</th>
             </tr>
           </thead>
-
           <tbody>
             {cursos.map((curso) => (
-              <tr key={curso.id} className="border-t border-gray-200 dark:border-gray-700">
+              <tr key={curso.id} data-testid={`curso:linha-${curso.id}`} className="border-t border-gray-200 dark:border-gray-700">
                 <td className="px-4 py-2 text-gray-800 dark:text-white">
                   <Tooltip>
                     <TooltipTrigger asChild>
                       <span
-                        className="cursor-help focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="cursor-help focus:outline-none focus-visible:ring-2 ring-blue-500"
                         tabIndex="0"
                         aria-label={`${t('cursos.tooltip.titulo')}: ${curso.titulo}`}
                       >
                         {curso.titulo}
                       </span>
                     </TooltipTrigger>
-                    <TooltipContent>
-                      {t('cursos.tooltip.titulo')}
+                    <TooltipContent side="top">
+                      {t('cursos.tooltip.titulo', 'Título completo do curso')}
                     </TooltipContent>
                   </Tooltip>
                 </td>
+
                 <td className="px-4 py-2 text-gray-800 dark:text-white">{curso.instrutor}</td>
+
                 <td className="px-4 py-2 flex items-center gap-2">
                   <span
-                    className={`px-2 py-1 text-sm rounded-full font-semibold ${
-                      curso.publicado
-                        ? 'bg-green-200 text-green-800'
-                        : 'bg-yellow-200 text-yellow-800'
-                    }`}
-                    aria-label={
-                      curso.publicado ? t('cursos.publicado') : t('cursos.rascunho')
-                    }
+                    className={`badge ${curso.publicado ? 'bg-green-200 text-green-800' : 'bg-yellow-200 text-yellow-800'}`}
+                    aria-label={curso.publicado ? t('cursos.publicado') : t('cursos.rascunho')}
                   >
-                    {curso.publicado ? t('cursos.publicado') : t('cursos.rascunho')}
+                    {curso.publicado ? t('cursos.publicado', 'Publicado') : t('cursos.rascunho', 'Rascunho')}
                   </span>
                   <button
-                    onClick={() => alternarStatusCurso(curso.id, !curso.publicado)}
-                    className="text-xs px-2 py-1 bg-blue-100 text-blue-700 rounded hover:bg-blue-200 transition-colors duration-200"
+                    onClick={() => {
+                      fetch(`/api/cursos/${curso.id}`, {
+                        method: 'PATCH',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ publicado: !curso.publicado }),
+                      }).then(() => {
+                        setCursos((prev) =>
+                          prev.map((c) =>
+                            c.id === curso.id ? { ...c, publicado: !curso.publicado } : c
+                          )
+                        );
+                      });
+                    }}
+                    className="action-button text-xs bg-blue-100 text-blue-700 hover:bg-blue-200"
+                    aria-label={curso.publicado ? t('cursos.despublicar') : t('cursos.publicar')}
+                    data-testid={`curso:toggle-${curso.id}`}
                   >
-                    {curso.publicado ? t('cursos.despublicar') : t('cursos.publicar')}
+                    {curso.publicado ? t('cursos.despublicar', 'Despublicar') : t('cursos.publicar', 'Publicar')}
                   </button>
                 </td>
               </tr>
@@ -144,4 +134,3 @@ export default function AdminCursosPage() {
     </section>
   );
 }
-

@@ -1,23 +1,22 @@
 // =====================================================================================
-// 📄 trackAccessDenied.js | Agroverso – Núcleo Modular de Telemetria de RBAC (v3.1)
+// 📄 trackAccessDenied.js | Agroverso – Núcleo de Telemetria RBAC Modularizado (v4.0)
 // =====================================================================================
-// ✅ Corrige e refina duplicidade de eventos
-// ✅ Adiciona traceId global para correlação cross-plataforma
-// ✅ Padroniza nomenclatura: userRole, expectedRoles, path
-// ✅ Permite plugins externos com prioridade e silenciamento
-// ✅ Isola falhas por destino com try/catch independentes
+// 🎯 Finalidade:
+//     • Registrar eventos de acesso negado por RBAC com rastreabilidade total e plugabilidade externa.
+//     • Compatível com SSR, GTM, LogRocket, DataDog, plugins externos e sistemas analíticos futuros.
 // =====================================================================================
 
 import { sendToGTM } from './destinos/sendToGTM';
 import { sendToLogRocket } from './destinos/sendToLogRocket';
 import { sendToDatadog } from './destinos/sendToDatadog';
 
-const DESTINOS = ['GTM', 'LogRocket', 'DataDog'];
+const DESTINOS_PADRAO = ['GTM', 'LogRocket', 'DataDog'];
 const registeredTelemetryPlugins = [];
 
 /**
- * 🔌 Registra plugins externos de rastreamento
- * @param {(evento: object) => void} fn
+ * 🔌 registerTelemetryPlugin
+ * Permite injetar plugins externos com prioridade e isolamento.
+ * @param {(evento: object) => void} fn - função callback do plugin
  * @param {{ prioridade?: number, silencioso?: boolean }} options
  */
 export function registerTelemetryPlugin(fn, options = {}) {
@@ -29,19 +28,19 @@ export function registerTelemetryPlugin(fn, options = {}) {
 }
 
 function gerarTraceId() {
-  return 'trace_' + Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
+  return `trace_${Math.random().toString(36).substring(2, 8)}_${Date.now().toString(36)}`;
 }
 
-export function isSSR() {
+function isSSR() {
   return typeof window === 'undefined';
 }
 
 /**
  * 🚫 trackAccessDenied
- * Registra um evento unificado de acesso negado por RBAC
+ * Registra um evento unificado de acesso negado por RBAC (Role-Based Access Control).
  *
  * @param {{ userRole: string, esperado: string[], rota: string }} opts
- * @param {'ativo' | 'passivo'} modo - Define o comportamento SSR
+ * @param {'ativo' | 'passivo'} modo – Define o comportamento em ambiente SSR
  */
 export function trackAccessDenied(opts, modo = 'ativo') {
   const { userRole, esperado, rota } = opts;
@@ -64,26 +63,26 @@ export function trackAccessDenied(opts, modo = 'ativo') {
     timestamp,
   };
 
-  // 🎯 Envio para destinos principais (modularizados)
+  // 🎯 Envio para destinos padrão
   try {
-    sendToGTM({ ...evento });
+    sendToGTM(evento);
   } catch (err) {
     console.warn('[GTM] erro ao enviar evento:', err);
   }
 
   try {
-    sendToLogRocket({ ...evento });
+    sendToLogRocket(evento);
   } catch (err) {
     console.warn('[LogRocket] erro ao rastrear evento:', err);
   }
 
   try {
-    sendToDatadog({ ...evento });
+    sendToDatadog(evento);
   } catch (err) {
     console.warn('[DataDog] erro ao registrar evento:', err);
   }
 
-  // 🔌 Execução de plugins externos ordenados por prioridade
+  // 🔌 Plugins externos (ordenados por prioridade)
   registeredTelemetryPlugins
     .sort((a, b) => b.prioridade - a.prioridade)
     .forEach(({ fn, silencioso }) => {
@@ -91,13 +90,13 @@ export function trackAccessDenied(opts, modo = 'ativo') {
         fn(evento);
       } catch (err) {
         if (!silencioso) throw err;
-        console.warn('[Plugin externo] falha isolada', err);
+        console.warn('[Plugin externo] falha isolada:', err);
       }
     });
 
-  // 🖥️ Log final para correlação e debug
-  console.info('[RBAC][Resumo de Telemetria]', {
-    destinos: DESTINOS,
+  // 🧠 Log final para rastreabilidade
+  console.info('[RBAC][Telemetry Summary]', {
+    destinos: DESTINOS_PADRAO,
     pluginsRegistrados: registeredTelemetryPlugins.length,
     ...evento,
   });
