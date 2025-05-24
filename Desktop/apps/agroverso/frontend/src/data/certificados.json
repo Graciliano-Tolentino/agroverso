@@ -1,0 +1,74 @@
+[
+  {
+    "nome": "Lucas Henrique da Silva",
+    "curso": "Introdução à Automação Hidropônica",
+    "codigo": "AGRO-95ef32ca-3fd8-4f4d-b36f-a79b087e5d73",
+    "data": "2025-05-14"
+  },
+  {
+    "nome": "Fernanda Lima Barbosa",
+    "curso": "Certificação em Sustentabilidade Agroverso",
+    "codigo": "AGRO-c153f0ee-b8e3-4411-91f7-b8c9d916a3f5",
+    "data": "2025-04-27"
+  },
+  {
+    "nome": "Gabriel dos Santos Rocha",
+    "curso": "Uso Inteligente de Energia Fotovoltaica",
+    "codigo": "AGRO-374ec2ab-1583-4c7d-97f8-3d9f1cfc418a",
+    "data": "2025-03-22"
+  },
+  {
+    "nome": "Aline Costa Ferreira",
+    "curso": "Práticas Regenerativas na Agricultura Familiar",
+    "codigo": "AGRO-64fae1a9-4870-4f9d-9835-24de27c6712f",
+    "data": "2025-05-05"
+  },
+  {
+    "nome": "Vinícius Almeida Ramos",
+    "curso": "Gestão de Recursos Naturais com IoT",
+    "codigo": "AGRO-b1b2f7c4-9945-4639-bc99-95a2c15874df",
+    "data": "2025-05-01"
+  },
+  {
+    "nome": "Mariana Queiroz Martins",
+    "curso": "Monitoramento Ambiental com Sensores Inteligentes",
+    "codigo": "AGRO-2e9ddc07-1a34-4048-8f15-40b92e1f5eeb",
+    "data": "2025-04-20"
+  },
+  {
+    "nome": "Rafael Tavares Moura",
+    "curso": "Sistemas Inteligentes de Irrigação por Gotejamento",
+    "codigo": "AGRO-a8c772eb-7f4f-4d36-90a2-6c782f276d1d",
+    "data": "2024-11-12"
+  },
+  {
+    "nome": "Letícia Amaral de Souza",
+    "curso": "Tecnologias para Inclusão Digital Rural",
+    "codigo": "AGRO-55df7ce5-cc11-496a-bd0f-2b4208c937e9",
+    "data": "2024-09-30"
+  },
+  {
+    "nome": "Alex S. Duarte",
+    "curso": "Boas Práticas em Energia Solar Descentralizada",
+    "codigo": "AGRO-f0cd0c10-1e60-4c6e-9dd6-e5a42dc54f94",
+    "data": "2024-08-18"
+  },
+  {
+    "nome": "João Victor Batista",
+    "curso": "Agroecologia e Sustentabilidade Regenerativa",
+    "codigo": "AGRO-1bcb5e6a-2fd7-44fa-9f6c-c5b1f51d78a2",
+    "data": "2024-07-10"
+  },
+  {
+    "nome": "Camila dos Anjos Lima",
+    "curso": "Infraestrutura Verde e Gestão de Microbacias",
+    "codigo": "AGRO-8efb1e3a-3cb3-44a6-9804-1082e6b496a0",
+    "data": "2024-06-15"
+  },
+  {
+    "nome": "Thiago Ramos de Almeida",
+    "curso": "Empreendedorismo Digital no Campo",
+    "codigo": "AGRO-c2a3989d-44ef-4477-9cfa-0aeab3f9b879",
+    "data": "2024-05-05"
+  }
+]

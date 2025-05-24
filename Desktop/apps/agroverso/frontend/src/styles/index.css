@@ -1,0 +1,19 @@
+/* 🎨 index.css – Estilos globais do Agroverso com Tailwind */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 🌱 Estilo adicional do body */
+body {
+  @apply bg-white text-grayIntelligent antialiased;
+}
+
+/* 🔗 Estilo base para links institucionais */
+a {
+  @apply transition-colors duration-200;
+}
+
+/* 🔒 Classe para links de rodapé */
+.footer-link {
+  @apply text-grayIntelligent hover:text-greenRegenerative;
+}

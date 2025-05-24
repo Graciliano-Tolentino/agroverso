@@ -1,0 +1,66 @@
+/*
+  =====================================================================================
+  📄 admin.json | Agroverso – Dados Simulados de Usuários para Modo Demonstração
+  📁 Diretório: public/data/
+  🎯 Finalidade:
+      Fornecer um conjunto de credenciais e perfis fictícios para testes e simulações
+      no modo de desenvolvimento com dados fake (VITE_ENABLE_FAKE_DATA=true).
+  🔐 Segurança:
+      As senhas estão codificadas em base64 apenas como ilustração – não representam
+      práticas seguras de armazenamento de senha em produção.
+  🧭 Justificativa:
+      Centralização em public/data garante acesso via fetch e evita duplicidade em src/data.
+  🌟 Desenvolvido com sabedoria, força e beleza – padrão High Tech Agroverso
+  =====================================================================================
+*/
+[
+  {
+    "id": 1,
+    "nome": "Administrador Padrão",
+    "usuario": "admin@agroverso.tec.br",
+    "senha": "MTIzNDU2", // base64 de "123456"
+    "perfil": "Administrador",
+    "tipo": "Interno",
+    "permissoes": [
+      "usuarios:gerenciar",
+      "sistema:configurar",
+      "relatorios:ver"
+    ]
+  },
+  {
+    "id": 2,
+    "nome": "Técnico de Campo",
+    "usuario": "tecnico@agroverso.tec.br",
+    "senha": "dGVjbmljbzEyMw==", // base64 de "tecnico123"
+    "perfil": "Técnico",
+    "tipo": "Operacional",
+    "permissoes": [
+      "leituras:registrar",
+      "clientes:visualizar"
+    ]
+  },
+  {
+    "id": 3,
+    "nome": "Consultor Comercial",
+    "usuario": "consultor@agroverso.tec.br",
+    "senha": "dmVuZGFzMjAyNQ==", // base64 de "vendas2025"
+    "perfil": "Consultor",
+    "tipo": "Externo",
+    "permissoes": [
+      "clientes:consultar",
+      "vendas:iniciar",
+      "relatorios:acesso-limitado"
+    ]
+  }
+]
+/*
+  =====================================================================================
+  🔚 Fim do Arquivo: public/data/admin.json
+  🔒 Dados simulados utilizados exclusivamente no modo de demonstração
+  🔁 Este arquivo é acessado via fetch como uma simulação de endpoint de autenticação
+  🧼 Importante: senhas codificadas em base64 apenas para fins educacionais
+  🚫 Não utilizar em produção real – conteúdo puramente fictício
+  🧠 Mantenedor: Equipe Agroverso | https://agroverso.tec.br
+  📆 Última atualização: 10/05/2025
+  =====================================================================================
+*/
