@@ -64,51 +64,33 @@
     "regenerativo",
     "ecossistema"
   ],
-
   "scripts": {
-
     "dev": "vite",
     "preview": "vite preview",
     "start": "vite",
     "start:mock": "NODE_ENV=mock vite",
-
-
     "typecheck": "tsc --noEmit",
     "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\"",
     "lint:fix": "eslint \"src/**/*.{js,jsx,ts,tsx}\" --fix",
     "lint:check": "eslint --ext .js,.ts,.tsx .",
-
-
     "format": "prettier --check \"src/**/*.{js,jsx,ts,tsx,json,css,md}\"",
     "format:all": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,md}\"",
-
-
     "build": "vite build && npm run build:types",
     "build:types": "tsc --emitDeclarationOnly",
     "build:preview": "npm run validate && vite preview",
-
-
     "validate": "npm run typecheck && npm run lint && npm run format && npm run test",
     "ci": "npm run validate && npm run build",
-    
-
     "test": "npm run test:unit && npm run test:e2e",
     "test:unit": "vitest run --coverage",
     "test:watch": "vitest watch",
     "test:e2e": "cypress run --e2e",
     "test:e2e:open": "cypress open",
-
-
     "security": "npm audit --production && snyk test",
-
-
     "prepare": "husky install",
-
     "deploy": "vercel --prod",
     "release": "standard-version",
     "postversion": "git push && git push --tags"
   },
-
   "devDependencies": {
     "@commitlint/cli": "^19.3.0",
     "@commitlint/config-conventional": "^19.2.1",
@@ -145,7 +127,6 @@
     "vite-plugin-compression": "^0.5.1",
     "vitest": "^3.1.4"
   },
-
   "lint-staged": {
     "*.{js,jsx,ts,tsx,json,css,md}": [
       "prettier --write",
@@ -156,12 +137,5 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
-  },
-  "sideEffects": false,
-  "browser": {
-    "crypto": false
-  },
-  "bin": {
-    "check-env": "./check-env.js"
   }
 }

@@ -1,146 +1,90 @@
-// ==============================================================================
-// 📄 useLogger.js | Agroverso – Logging Centralizado com Rastreamento Multi-canal
+// =====================================================================================================
+// 📄 useLogger.js | Agroverso – Hook de Logging Global com Captura de Erros, Rejeições e Replay Offline
 // 📁 Diretório: src/hooks/
-// 🎯 Propósito:
-//     • Capturar erros globais e rejeições
-//     • Unificar registro de erros e avisos com rastreabilidade total
-//     • Integrar com Sentry, LogRocket, GTM, Datadog e fallback local
-// ==============================================================================
+// 🌐 Integração: Sentry, LogRocket, GTM, Datadog, Observabilidade Agroverso
+// 🔁 Foco: resiliência offline, rastreabilidade contextual e segurança silenciosa
+// =====================================================================================================
 
-import { useEffect } from 'react';
-import { logToDestinations, throttleLog, saveOfflineLog } from '@/utils/logger';
+import { useEffect } from 'react'
+import {
+  logToDestinations,
+  throttleLog,
+  saveOfflineLog,
+  replayOfflineLogs
+} from '@/utils/logger'
 
 /**
- * Hook Agroverso para captura reativa global (onerror e unhandledrejection)
- * Usado uma vez por componente raiz (ex: App.jsx)
+ * useLogger – Hook universal de logging centralizado
+ * Ativa:
+ *   1. Replay de logs offline (armazenados em localStorage)
+ *   2. Captura de erros globais (window.onerror)
+ *   3. Captura de rejeições não tratadas (unhandledrejection)
+ *
+ * @param {Object} [config]
+ * @param {string} [config.component='App'] – Identificador do ponto de origem (componente base)
+ * @param {string} [config.context='App Boot'] – Contexto semântico do logger
+ * @param {boolean} [config.offlineFallback=true] – Permitir salvar logs localmente em caso de falha
  */
-export default function useLogger({ component, context, offlineFallback = false }) {
+export default function useLogger({
+  component = 'App',
+  context = 'App Boot',
+  offlineFallback = true
+} = {}) {
   useEffect(() => {
-    // 📛 Captura de erros globais
-    const handleError = (error, source, lineno, colno, errObj) => {
-      const key = `${component}::${error?.message || 'erro_global'}`;
-      if (!throttleLog(key)) return;
+    // 🔁 Reenvia logs salvos no localStorage
+    replayOfflineLogs()
+
+    // 📛 Captura de erros não interceptados no navegador
+    const handleGlobalError = (msg, src, lineno, colno, err) => {
+      const key = `${component}::${msg}`
+      if (!throttleLog(key)) return
 
       const logData = {
         level: 'error',
-        message: error?.message || 'Erro global não identificado',
-        stack: errObj?.stack || error?.stack || `at ${source}:${lineno}:${colno}`,
+        message: msg,
+        stack: err?.stack || `at ${src}:${lineno}:${colno}`,
         component,
         context,
         type: 'window.onerror',
-        timestamp: new Date().toISOString(),
-      };
+        timestamp: new Date().toISOString()
+      }
 
       try {
-        logToDestinations(logData);
-      } catch (dispatchError) {
-        if (offlineFallback) saveOfflineLog(logData);
+        logToDestinations(logData)
+      } catch {
+        if (offlineFallback) saveOfflineLog(logData)
       }
-    };
+    }
 
-    // ❌ Captura de Promessas rejeitadas
-    const handleRejection = (event) => {
-      const error = event.reason || {};
-      const key = `${component}::${error?.message || 'rejeicao_nao_tratada'}`;
-      if (!throttleLog(key)) return;
+    // ❌ Captura de rejeições silenciosas (Promises não tratadas)
+    const handlePromiseRejection = event => {
+      const error = event.reason || {}
+      const key = `${component}::${error.message || 'Rejeição silenciosa'}`
+      if (!throttleLog(key)) return
 
       const logData = {
         level: 'error',
-        message: error?.message || 'Rejeição de promessa sem tratamento',
-        stack: error?.stack || error?.toString() || null,
+        message: error.message || 'Rejeição de promessa não tratada',
+        stack: error.stack || error.toString() || null,
         component,
         context,
         type: 'unhandledrejection',
-        timestamp: new Date().toISOString(),
-      };
+        timestamp: new Date().toISOString()
+      }
 
       try {
-        logToDestinations(logData);
-      } catch (dispatchError) {
-        if (offlineFallback) saveOfflineLog(logData);
+        logToDestinations(logData)
+      } catch {
+        if (offlineFallback) saveOfflineLog(logData)
       }
-    };
+    }
 
-    window.addEventListener('error', handleError);
-    window.addEventListener('unhandledrejection', handleRejection);
+    window.addEventListener('error', handleGlobalError)
+    window.addEventListener('unhandledrejection', handlePromiseRejection)
+
     return () => {
-      window.removeEventListener('error', handleError);
-      window.removeEventListener('unhandledrejection', handleRejection);
-    };
-  }, [component, context, offlineFallback]);
-}
-// ==============================================================================
-// ✅ Métodos utilitários para logging direto em componentes, funções e fallbacks
-// ==============================================================================
-
-/**
- * logError – Registra erro com stack e contexto técnico
- * @param {Object} options
- * @param {Error} [options.error] – Objeto de erro original (preferencial)
- * @param {string} [options.message] – Mensagem alternativa
- * @param {string} options.component – Nome do componente onde ocorreu o erro
- * @param {string} options.context – Descrição funcional ou módulo
- * @param {string} [options.level='error'] – Nível de severidade
- * @param {boolean} [options.offlineFallback=true] – Salvar localmente se falhar
- */
-export function logError({
-  error,
-  message = '',
-  component,
-  context,
-  level = 'error',
-  offlineFallback = true,
-}) {
-  const key = `${component}::${error?.message || message || 'erro_desconhecido'}`;
-  if (!throttleLog(key)) return;
-
-  const logData = {
-    level,
-    message: error?.message || message || 'Erro não especificado',
-    stack: error?.stack || error?.toString() || 'stack indisponível',
-    component,
-    context,
-    type: 'runtime',
-    timestamp: new Date().toISOString(),
-  };
-
-  try {
-    logToDestinations(logData);
-  } catch (dispatchError) {
-    if (offlineFallback) saveOfflineLog(logData);
-  }
-}
-
-/**
- * logWarn – Registra aviso técnico ou operacional com rastreabilidade
- * @param {Object} options
- * @param {string} options.message – Texto do aviso
- * @param {string} options.component – Nome do componente de origem
- * @param {string} options.context – Situação ou motivo do log
- * @param {boolean} [options.offlineFallback=false]
- */
-export function logWarn({
-  message,
-  component,
-  context,
-  offlineFallback = false,
-}) {
-  const key = `${component}::${message}`;
-  if (!throttleLog(key)) return;
-
-  const logData = {
-    level: 'warn',
-    message: message || 'Aviso não especificado',
-    stack: null,
-    component,
-    context,
-    type: 'warning',
-    timestamp: new Date().toISOString(),
-  };
-
-  try {
-    logToDestinations(logData);
-  } catch (dispatchError) {
-    if (offlineFallback) saveOfflineLog(logData);
-  }
+      window.removeEventListener('error', handleGlobalError)
+      window.removeEventListener('unhandledrejection', handlePromiseRejection)
+    }
+  }, [component, context, offlineFallback])
 }

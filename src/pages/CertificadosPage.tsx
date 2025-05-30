@@ -1,46 +1,45 @@
 // =====================================================================================
-// 📄 CertificadosPage.tsx (v3.3)
+// 📄 CertificadosPage.tsx (v3.4)
 // 📁 src/pages
 // ✍️ Refatorado por: Graciliano Tolentino
-// 📅 Atualizado em: 25/05/2025
+// 📅 Atualizado em: 29/05/2025
 // 🎯 Página pública de validação de certificados via QR Code com suporte a JWT antifraude
-//
 // 🌍 Framework Agroverso — Transparência, rastreabilidade e veracidade institucional
 // =====================================================================================
 
-import React, { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import jwtDecode from 'jwt-decode';
+import React, { useEffect, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
+import { jwtDecode } from 'jwt-decode' // ✅ Corrigido: importação nomeada
 
 interface CertificadoPayload {
-  nome: string;
-  curso: string;
-  data: string;
-  emitidoEm: string;
-  id: string;
-  origem?: string;
+  nome: string
+  curso: string
+  data: string
+  emitidoEm: string
+  id: string
+  origem?: string
 }
 
 const CertificadosPage: React.FC = () => {
-  const [searchParams] = useSearchParams();
-  const [dados, setDados] = useState<CertificadoPayload | null>(null);
-  const [erro, setErro] = useState<string | null>(null);
+  const [searchParams] = useSearchParams()
+  const [dados, setDados] = useState<CertificadoPayload | null>(null)
+  const [erro, setErro] = useState<string | null>(null)
 
   useEffect(() => {
-    const token = searchParams.get('token');
+    const token = searchParams.get('token')
     if (!token) {
-      setErro('Token ausente ou inválido.');
-      return;
+      setErro('Token ausente ou inválido.')
+      return
     }
 
     try {
-      const decoded = jwtDecode<CertificadoPayload>(token);
-      setDados(decoded);
+      const decoded = jwtDecode<CertificadoPayload>(token)
+      setDados(decoded)
     } catch (err) {
-      console.error('[CertificadosPage] Erro ao decodificar o token JWT:', err);
-      setErro('Token inválido, corrompido ou expirado.');
+      console.error('[CertificadosPage] Erro ao decodificar o token JWT:', err)
+      setErro('Token inválido, corrompido ou expirado.')
     }
-  }, [searchParams]);
+  }, [searchParams])
 
   if (erro) {
     return (
@@ -51,11 +50,11 @@ const CertificadosPage: React.FC = () => {
           Agroverso — Validador Público de Certificados
         </p>
       </section>
-    );
+    )
   }
 
   if (!dados) {
-    return <p className="text-center mt-12">⏳ Validando certificado...</p>;
+    return <p className="text-center mt-12">⏳ Validando certificado...</p>
   }
 
   return (
@@ -95,7 +94,7 @@ const CertificadosPage: React.FC = () => {
         Certificado verificado por Agroverso — Plataforma de Sabedoria Verde.
       </p>
     </article>
-  );
-};
+  )
+}
 
-export default CertificadosPage;
+export default CertificadosPage

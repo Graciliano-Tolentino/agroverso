@@ -1,39 +1,38 @@
 // =====================================================================================
-// 📄 validar.jsx
-// 📁 pages
+// 📄 ValidarPage.jsx (v2.0)
+// 📁 src/pages
 // ✍️ Desenvolvido por: Graciliano Tolentino
-// 📅 Atualizado em: 25/05/2025
-// 🎯 Visualização pública de certificados Agroverso com validação antifraude
-//
+// 📅 Atualizado em: 29/05/2025
+// 🎯 Visualização pública de certificados Agroverso com validação antifraude via JWT
 // 🌍 Framework Agroverso — Interface de confiança pública com sabedoria, força e beleza
 // =====================================================================================
 
-import React, { useEffect, useState } from 'react';
-import jwt_decode from 'jwt-decode';
-import { useSearchParams } from 'react-router-dom'; // ou useRouter() em Next.js
+import React, { useEffect, useState } from 'react'
+import { jwtDecode } from 'jwt-decode' // ✅ Importação corrigida: nomeada
+import { useSearchParams } from 'react-router-dom'
 
 const ValidarCertificado = () => {
-  const [params] = useSearchParams();
-  const [dados, setDados] = useState(null);
-  const [erro, setErro] = useState(null);
-  const [verificadoEm, setVerificadoEm] = useState(null);
+  const [params] = useSearchParams()
+  const [dados, setDados] = useState(null)
+  const [erro, setErro] = useState(null)
+  const [verificadoEm, setVerificadoEm] = useState(null)
 
   useEffect(() => {
-    const token = params.get('token');
+    const token = params.get('token')
     if (!token) {
-      setErro('Token de verificação ausente.');
-      return;
+      setErro('❗ Token de verificação ausente.')
+      return
     }
 
     try {
-      const decoded = jwt_decode(token);
-      setDados(decoded);
-      setVerificadoEm(new Date().toLocaleString('pt-BR'));
+      const payload = jwtDecode(token)
+      setDados(payload)
+      setVerificadoEm(new Date().toLocaleString('pt-BR'))
     } catch (err) {
-      console.error('Erro ao decodificar token:', err);
-      setErro('Token inválido ou expirado.');
+      console.error('[ValidarPage] Erro ao decodificar JWT:', err)
+      setErro('❌ Token inválido, corrompido ou expirado.')
     }
-  }, [params]);
+  }, [params])
 
   if (erro) {
     return (
@@ -42,16 +41,16 @@ const ValidarCertificado = () => {
         <p>{erro}</p>
         <p className="text-sm mt-4 italic text-gray-600">Agroverso — Validador Público</p>
       </section>
-    );
+    )
   }
 
   if (!dados) {
-    return <p className="text-center mt-12">Validando certificado...</p>;
+    return <p className="text-center mt-12">⏳ Validando certificado...</p>
   }
 
   return (
     <article className="max-w-2xl mx-auto mt-10 bg-white shadow-md rounded-lg p-8 text-gray-800 font-sans">
-      <h1 className="text-2xl font-bold text-green-700 mb-4">Certificado válido</h1>
+      <h1 className="text-2xl font-bold text-green-700 mb-4">✅ Certificado válido</h1>
       <dl className="grid grid-cols-1 gap-2">
         <div>
           <dt className="font-semibold">Nome:</dt>
@@ -86,7 +85,7 @@ const ValidarCertificado = () => {
         Certificado verificado por Agroverso — Plataforma de Sabedoria Verde.
       </p>
     </article>
-  );
-};
+  )
+}
 
-export default ValidarCertificado;
+export default ValidarCertificado

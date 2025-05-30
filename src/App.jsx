@@ -1,33 +1,34 @@
 // ==============================================================================
-// 📄 App.jsx | Agroverso – Estrutura Principal da Aplicação com Logger Resiliente
+// 📄 App.jsx | Agroverso – Estrutura Principal da Aplicação com Logger Inteligente e Modular
 // 📁 Diretório: src/
-// ✨ Atualizado com replay de logs offline via useLogger()
+// 🎯 Finalidade:
+//     • Roteamento centralizado com segurança (Auth)
+//     • Tema reativo com dark mode nativo
+//     • Observabilidade com replay de logs e rastreamento global
 // ==============================================================================
 
-import React, { useEffect } from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import React from 'react'
+import { BrowserRouter } from 'react-router-dom'
 
-// 🧠 Roteamento modularizado
-import AppRoutes from './routes/AppRoutes';
+// 🌐 Roteamento modularizado
+import AppRoutes from './routes/AppRoutes'
 
-// 🌒 Contexto global de tema (claro/escuro)
-import { ThemeProvider } from './context/ThemeContext';
+// 🌒 Contexto de tema (claro/escuro)
+import { ThemeProvider } from './context/ThemeContext'
 
 // 🔐 Contexto global de autenticação
-import { AuthProvider } from './context/AuthContext';
+import { AuthProvider } from './context/AuthContext'
 
-// 📡 Observabilidade Agroverso – Telemetria com replay de logs offline
-import { useLogger } from './hooks/useLogger';
+// 📡 Observabilidade Agroverso – Telemetria com replay e fallback offline
+import useLogger from '@/hooks/useLogger'
 
 export default function App() {
-  const logger = useLogger();
-
-  // 🔁 Replay automático de logs salvos offline ao iniciar com conexão
-  useEffect(() => {
-    if (navigator.onLine) {
-      logger.replayOfflineLogs();
-    }
-  }, []);
+  // 🧠 Ativação do logger global (captura erros e rejeições)
+  useLogger({
+    component: 'App',
+    context: 'Inicialização da aplicação',
+    offlineFallback: true
+  })
 
   return (
     <ThemeProvider>
@@ -37,11 +38,11 @@ export default function App() {
         </BrowserRouter>
       </AuthProvider>
     </ThemeProvider>
-  );
+  )
 }
 
 // ==============================================================================
 // 🔚 Fim do arquivo: src/App.jsx
-// 🌐 Roteamento seguro, temas integrados e replay de logs ativado com perfeição
-// 🧠 Agroverso – Sistema observável, modular e pronto para ambientes reais
+// 📦 Modularidade completa com rastreamento, contexto, acessibilidade e estabilidade
+// 🧠 Agroverso – Preparado para ambientes reais, observáveis e resilientes
 // ==============================================================================

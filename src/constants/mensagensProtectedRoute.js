@@ -1,25 +1,37 @@
 // =====================================================================================
-// 📄 mensagensProtectedRoute.js | Agroverso – Mensagens de Rotas Protegidas
+// 📄 mensagensProtectedRoute.js | Agroverso – Mensagens Padrão da Rota Protegida
 // =====================================================================================
-// 📌 Finalidade:
-//     • Mensagens multilíngues para rotas que exigem autenticação.
-//     • Suporte emocional, empático e internacionalizado.
-// 🔐 Integrado ao RBAC e rastreamento semântico Agroverso.
+// 🎯 Finalidade:
+//     • Centralizar textos de controle de acesso em rotas protegidas.
+//     • Facilitar reutilização, manutenção e suporte multilíngue (pt/en).
+//     • Eliminar acoplamento de mensagens no componente.
+// 🔐 Integrado ao RBAC, UX emocional e rastreabilidade semântica.
 // ✨ Desenvolvido com sabedoria, força e beleza — Padrão Técnico 12/10
 // =====================================================================================
 
-/**
- * 🔒 mensagensProtectedRoute
- * Conjunto padronizado de mensagens para rotas protegidas.
- * Com suporte multilíngue (pt, en), fallback e rastreabilidade emocional.
- */
-export const mensagensProtectedRoute = {
+export const mensagens = {
   acessoNegado: {
-    pt: "⛔ Acesso negado: você não tem permissão para visualizar esta página.",
-    en: "⛔ Access denied: you do not have permission to view this page.",
+    pt: '⛔ Acesso negado: você não tem permissão para visualizar esta página.',
+    en: '⛔ Access denied: you do not have permission to view this page.'
   },
-  precisaEstarLogado: {
-    pt: "🔐 Acesso restrito: é necessário estar logado para continuar.",
-    en: "🔐 Restricted access: you must be logged in to continue.",
+  redirecionando: {
+    pt: '🔄 Redirecionando para a página de login...',
+    en: '🔄 Redirecting to login page...'
   },
-};
+  autenticando: {
+    pt: '🔐 Verificando suas credenciais...',
+    en: '🔐 Verifying your credentials...'
+  },
+  expirado: {
+    pt: '⏰ Sessão expirada. Por favor, faça login novamente.',
+    en: '⏰ Session expired. Please log in again.'
+  },
+  bloqueado: {
+    pt: '🔒 Acesso temporariamente bloqueado.',
+    en: '🔒 Access temporarily blocked.'
+  },
+  aguardando: {
+    pt: '⏳ Aguarde enquanto preparamos seu ambiente seguro.',
+    en: '⏳ Please wait while we prepare your secure environment.'
+  }
+}
