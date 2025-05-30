@@ -1,8 +1,8 @@
 // =====================================================================================
-// 📄 CertificadoComExportacao.jsx (v3.3)
+// 📄 CertificadoComExportacao.jsx (v3.5)
 // 📁 src/components
 // ✍️ Refatorado por: Graciliano Tolentino
-// 📅 Atualizado em: 21/05/2025
+// 📅 Atualizado em: 30/05/2025
 // 🎯 Certificado com validação antifraude, persistência auditável e exportação segura
 //
 // 🌍 Framework Agroverso — Perfeição auditável com sabedoria, força e beleza
@@ -10,7 +10,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import QRCode from 'qrcode.react';
+import { QRCodeWrapper } from './QRCodeWrapper'; // ✅ Substituído QRCode direto pelo wrapper resiliente
 import html2pdf from 'html2pdf.js';
 
 const CertificadoComExportacao = ({
@@ -24,26 +24,6 @@ const CertificadoComExportacao = ({
   const fallback = (value) => (value && value.trim()) || 'DADO NÃO FORNECIDO';
 
   const urlValidacao = `https://certificados.agroverso.tec.br/validar?token=${codigoAssinadoJWT}`;
-
-  const exportPDF = () => {
-    const element = document.getElementById('certificate');
-    if (!element) {
-      console.error('Elemento #certificate não encontrado para exportação.');
-      alert('Erro: Certificado não pode ser exportado. Elemento não encontrado.');
-      return;
-    }
-
-    html2pdf()
-      .set({
-        margin: 0.5,
-        filename: `Certificado - ${fallback(nome)}.pdf`,
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2 },
-        jsPDF: { format: 'a4', orientation: 'portrait' },
-      })
-      .from(element)
-      .save();
-  };
 
   return (
     <>
@@ -75,17 +55,16 @@ const CertificadoComExportacao = ({
           </p>
         </section>
 
-        {/* Metadados visíveis */}
+        {/* Metadados */}
         <section className="text-center text-xs text-gray-500 mb-6">
           <p>
-            Emitido por <strong>{orgaoEmissor}</strong> em{' '}
-            <strong>{fallback(emitidoEm)}</strong>
+            Emitido por <strong>{orgaoEmissor}</strong> em <strong>{fallback(emitidoEm)}</strong>
           </p>
         </section>
 
-        {/* QR Code */}
+        {/* QR Code antifraude */}
         <aside className="text-center mb-8">
-          <QRCode value={urlValidacao} size={128} fgColor="#000000" bgColor="#ffffff" level="H" />
+          <QRCodeWrapper value={urlValidacao} />
           <p className="mt-2 text-sm text-grayIntelligent">Escaneie o QR Code ou acesse:</p>
           <p className="text-xs text-blue-600 underline mt-1 break-all">
             <a href={urlValidacao} target="_blank" rel="noreferrer">
@@ -119,10 +98,28 @@ const CertificadoComExportacao = ({
         </footer>
       </article>
 
-      {/* Botão de Exportação */}
+      {/* Exportação em PDF */}
       <div className="text-center mt-6">
         <button
-          onClick={exportPDF}
+          onClick={() => {
+            const element = document.getElementById('certificate');
+            if (!element) {
+              console.error('Elemento #certificate não encontrado para exportação.');
+              alert('Erro: Certificado não pode ser exportado. Elemento não encontrado.');
+              return;
+            }
+
+            html2pdf()
+              .set({
+                margin: 0.5,
+                filename: `Certificado - ${fallback(nome)}.pdf`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { format: 'a4', orientation: 'portrait' },
+              })
+              .from(element)
+              .save();
+          }}
           className="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded"
         >
           Exportar PDF

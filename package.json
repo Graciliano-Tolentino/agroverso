@@ -16,7 +16,7 @@
     }
   ],
   "license": "MIT",
-  "homepage": "https://agroverso.tec.br",
+  "homepage": "https://graciliano-tolentino.github.io/agroverso",
   "repository": {
     "type": "git",
     "url": "https://github.com/Graciliano-Tolentino/agroverso.git"
@@ -67,6 +67,8 @@
   "scripts": {
     "dev": "vite",
     "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "start": "vite",
     "start:mock": "NODE_ENV=mock vite",
     "typecheck": "tsc --noEmit",
@@ -87,7 +89,6 @@
     "test:e2e:open": "cypress open",
     "security": "npm audit --production && snyk test",
     "prepare": "husky install",
-    "deploy": "vercel --prod",
     "release": "standard-version",
     "postversion": "git push && git push --tags"
   },
@@ -98,6 +99,8 @@
     "@testing-library/react": "^14.3.1",
     "@testing-library/user-event": "^14.5.2",
     "@types/react-i18next": "^8.1.0",
+    "@types/react-router-dom": "^5.3.3",
+    "@vitejs/plugin-legacy": "^6.1.1",
     "@vitejs/plugin-react": "^4.5.0",
     "autoprefixer": "^10.4.21",
     "axe-core": "^4.7.2",
@@ -106,18 +109,20 @@
     "cypress": "^13.9.0",
     "cypress-axe": "^1.0.0",
     "cz-conventional-changelog": "^3.3.0",
+    "esbuild": "^0.25.4",
     "eslint": "^8.57.0",
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-jsx-a11y": "^6.8.0",
     "eslint-plugin-react": "^7.34.1",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "esbuild": "^0.25.4",
+    "gh-pages": "^6.3.0",
     "husky": "^9.0.11",
     "jsdom": "^26.1.0",
     "lint-staged": "^15.2.2",
     "postcss": "^8.5.4",
     "prettier": "^3.3.2",
+    "rollup-plugin-visualizer": "^6.0.1",
     "snyk": "^1.1285.0",
     "standard-version": "^9.5.0",
     "tailwindcss": "^4.1.8",
@@ -125,6 +130,7 @@
     "typescript": "^5.4.5",
     "vite": "^6.3.5",
     "vite-plugin-compression": "^0.5.1",
+    "vite-plugin-inspect": "^11.1.0",
     "vitest": "^3.1.4"
   },
   "lint-staged": {
@@ -137,5 +143,11 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "dependencies": {
+    "axios": "^1.9.0",
+    "framer-motion": "^12.15.0",
+    "qrcode.react": "^4.2.0",
+    "react-router-dom": "^7.6.1"
   }
 }
