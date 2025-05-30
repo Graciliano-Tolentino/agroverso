@@ -1,4 +1,4 @@
-## 📄 `README.md` – **Parte 1/3**
+## 📄 `README.md`
 
 ### Agroverso Frontend – Interface Web de Alta Tecnologia 🌱🚀
 
