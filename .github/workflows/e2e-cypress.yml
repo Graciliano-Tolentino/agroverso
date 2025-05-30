@@ -1,0 +1,46 @@
+name: E2E Cypress + A11y Checker
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  cypress-run:
+    name: 🔍 Testes E2E + Acessibilidade Agroverso
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🧾 Clonar repositório
+        uses: actions/checkout@v4
+
+      - name: 🟩 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: 📦 Instalar dependências
+        run: npm ci
+
+      - name: ⚙️ Build do projeto (condicional e auditável)
+        run: |
+          if npm run | grep -q " build"; then
+            echo "🔧 Script build encontrado – executando build..."
+            npm run build
+          else
+            echo "⚠️ Nenhum script 'build' encontrado – etapa ignorada."
+          fi
+
+      - name: 🧪 Executar Cypress com axe-core (modo headless)
+        run: npx cypress run --e2e
+
+      - name: 📤 Artefatos de falha (screenshots e vídeos)
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: cypress-artifacts
+          path: |
+            cypress/screenshots/
+            cypress/videos/

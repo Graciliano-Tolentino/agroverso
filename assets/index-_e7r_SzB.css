@@ -1,0 +1,1 @@
+@tailwind base;@tailwind components;@tailwind utilities;body{@apply bg-white text-grayIntelligent antialiased;}a{@apply transition-colors duration-200;}.footer-link{@apply text-grayIntelligent hover:text-greenRegenerative;}

@@ -1,0 +1,1 @@
+import{j as s}from"./react-vendor-CeVJx1TZ.js";import"./vendor-DEgGNhlE.js";function e(){return s.jsxs("div",{className:"p-8",children:[s.jsx("h1",{className:"text-3xl font-bold",children:"Relatórios Administrativos"}),s.jsx("p",{className:"mt-4",children:"Esta seção conterá os relatórios gerenciais do sistema Agroverso."})]})}export{e as default};

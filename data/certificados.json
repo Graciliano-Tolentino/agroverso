@@ -1,0 +1,63 @@
+/*
+  =====================================================================================
+  📄 certificados.json | Agroverso – Base de Certificados Simulados
+  📁 Diretório: public/data/
+  🎯 Finalidade:
+      Fornecer dados simulados para visualização pública e validação de certificados
+      emitidos via sistema Agroverso no modo de demonstração (sem backend ativo).
+  🧭 Justificativa:
+      Consolidado em /public/data para evitar duplicidade e permitir fetch direto.
+      Garante funcionamento estável do modo VITE_ENABLE_FAKE_DATA=true.
+  🔐 Segurança:
+      Todos os certificados simulados são fictícios e não possuem validade oficial.
+  🌟 Desenvolvido por Agroverso
+  =====================================================================================
+*/
+[
+  {
+    "id": "AGRO-0001",
+    "nome": "Joana Ribeiro",
+    "curso": "Irrigação Inteligente por Gotejamento",
+    "conclusao": "2025-03-12",
+    "valido": true
+  },
+  {
+    "id": "AGRO-0002",
+    "nome": "Carlos Henrique da Silva",
+    "curso": "Hidroponia Urbana Automatizada",
+    "conclusao": "2025-03-25",
+    "valido": true
+  },
+  {
+    "id": "AGRO-0003",
+    "nome": "Fernanda Lima dos Santos",
+    "curso": "Instalação de Sistemas Fotovoltaicos",
+    "conclusao": "2025-04-04",
+    "valido": true
+  },
+  {
+    "id": "AGRO-0004",
+    "nome": "Mateus Oliveira",
+    "curso": "Gestão Agroecológica com IoT",
+    "conclusao": "2025-04-18",
+    "valido": true
+  },
+  {
+    "id": "AGRO-9999",
+    "nome": "Usuário Inválido",
+    "curso": "Curso Falso",
+    "conclusao": "2021-01-01",
+    "valido": false
+  }
+]
+/*
+  =====================================================================================
+  🔚 Fim do Arquivo: public/data/certificados.json
+  📋 Contém registros simulados de certificados emitidos por cursos Agroverso
+  🔎 Utilizado para validação pública via interface (/certificados e /validar/:id)
+  ⚠️ Nenhum dos dados possui valor legal ou ligação com certificados reais
+  🧠 Mantido exclusivamente para testes em ambiente controlado (VITE_ENABLE_FAKE_DATA)
+  🧠 Mantenedor: Equipe Agroverso | https://agroverso.tec.br
+  📆 Última atualização: 10/05/2025
+  =====================================================================================
+*/
