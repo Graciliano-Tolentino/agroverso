@@ -1,0 +1,61 @@
+<!-- =======================================================================================
+ 📄 404.html – Redirecionador Silencioso para index.html (SPA support para GitHub Pages)
+ ✍️ Gerado por: Agroverso Tech • Atualizado em: 30/05/2025
+ 🌍 Framework Agroverso — Engenharia com Sabedoria, Força e Beleza
+ 🛡️ Compatível com GitHub Pages, Vercel e Netlify
+ ⚖️ Acessível, SEO-aware, Antifrágil e Preditivo
+ ======================================================================================= -->
+<!DOCTYPE html>
+<html lang="pt-BR" xml:lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Redirecionamento automático e silencioso para SPA -->
+    <meta http-equiv="refresh" content="0; url=/index.html" />
+
+    <!-- Canonical com proteção contra indexação excessiva -->
+    <link rel="canonical" href="/index.html" rel="nofollow" />
+
+    <!-- SEO e acessibilidade reforçada -->
+    <title>Redirecionando...</title>
+
+    <style>
+      body {
+        font-family: sans-serif;
+        text-align: center;
+        padding: 3rem;
+        color: #444;
+        background-color: #fdfdfd;
+      }
+      p {
+        font-size: 1.2rem;
+      }
+    </style>
+
+  </head>
+  <body>
+    <!-- Mensagem acessível para todos os usuários -->
+    <p aria-live="polite" role="status">
+      Redirecionando para a aplicação...
+    </p>
+
+    <!-- Fallback para navegadores sem JavaScript -->
+    <noscript>
+      <div style="margin-top: 2rem;">
+        <strong>Este site requer JavaScript.</strong><br />
+        Por favor, ative o JavaScript no seu navegador para continuar.<br />
+        Se o problema persistir, acesse diretamente: <a href="/index.html">/index.html</a>
+      </div>
+    </noscript>
+
+    <!-- Fallback programático com base na origem absoluta -->
+    <script>
+      // Redirecionamento extra em caso de falha do meta refresh
+      const destino = location.origin + '/index.html';
+      if (location.pathname !== '/index.html') {
+        window.location.replace(destino);
+      }
+    </script>
+  </body>
+</html>
